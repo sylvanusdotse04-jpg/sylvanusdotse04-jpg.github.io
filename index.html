@@ -37,9 +37,14 @@
     -webkit-font-smoothing:antialiased;
   }
   a{color:inherit;}
-  .lang-en{display:none;}
-  body.en .lang-fr{display:none;}
-  body.en .lang-en{display:inline;}
+  
+  /* GESTION TRILINGUE (FR par défaut, EN ou DE selon la classe sur body) */
+  .lang-en, .lang-de {display:none;}
+  body.en .lang-fr, body.en .lang-de {display:none;}
+  body.en .lang-en {display:inline;}
+  body.de .lang-fr, body.de .lang-en {display:none;}
+  body.de .lang-de {display:inline;}
+
   .wrap{max-width:1040px; margin:0 auto; padding:0 24px;}
 
   /* NAV */
@@ -59,7 +64,7 @@
   .lang-toggle{
     font-family:var(--font-mono); font-size:12px; letter-spacing:1px;
     background:transparent; border:1px solid var(--copper-dim); color:var(--copper);
-    padding:6px 10px; border-radius:var(--radius); cursor:pointer;
+    padding:6px 10px; border-radius:var(--radius); cursor:pointer; min-width: 45px; text-align: center;
   }
   .lang-toggle:hover{background:var(--copper); color:var(--pcb-green-dark);}
 
@@ -74,10 +79,12 @@
     font-family:var(--font-mono); font-size:13px; letter-spacing:0.5px;
     padding:12px 20px; border-radius:var(--radius); text-decoration:none;
     display:inline-flex; align-items:center; gap:8px; transition:transform .15s, box-shadow .15s;
+    cursor:pointer;
+    border:none;
   }
   .btn-primary{background:var(--led-green); color:var(--pcb-green-dark); font-weight:600;}
   .btn-primary:hover{transform:translateY(-2px); box-shadow:0 6px 18px rgba(61,220,132,0.25);}
-  .btn-ghost{border:1px solid var(--trace); color:var(--silk-white);}
+  .btn-ghost{border:1px solid var(--trace); color:var(--silk-white); background:transparent;}
   .btn-ghost:hover{border-color:var(--copper); color:var(--copper);}
 
   /* LED CHASER */
@@ -109,15 +116,17 @@
   .proj-card{
     border:1px solid var(--trace); border-radius:var(--radius); padding:26px;
     margin-bottom:20px; background:rgba(238,243,238,0.02);
-    transition:border-color .15s;
+    transition:border-color .15s, transform .15s;
+    cursor:pointer;
   }
-  .proj-card:hover{border-color:var(--copper-dim);}
+  .proj-card:hover{border-color:var(--copper); transform:translateY(-2px);}
   .proj-top{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; margin-bottom:10px;}
   .proj-ref{font-family:var(--font-mono); color:var(--copper); font-size:13px; white-space:nowrap;}
   .proj-card h3{font-family:var(--font-display); font-size:20px; font-weight:600; margin-bottom:8px;}
   .proj-card p{color:var(--silk-dim); margin-bottom:14px; font-size:14.5px;}
   .tags{display:flex; flex-wrap:wrap; gap:8px;}
   .tag{font-family:var(--font-mono); font-size:11px; padding:4px 9px; border:1px solid var(--trace); border-radius:20px; color:var(--silk-dim);}
+  .click-info{font-family:var(--font-mono); font-size:11px; color:var(--copper); margin-top:14px; display:block; text-align:right;}
 
   /* LABS GRID */
   .labs-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(230px,1fr)); gap:14px;}
@@ -134,6 +143,44 @@
   .exp-item h4{font-size:15px; margin-bottom:4px;}
   .exp-item p{color:var(--silk-dim); font-size:13.5px;}
 
+  /* MODAL */
+  .modal-overlay{
+    position:fixed; top:0; left:0; width:100%; height:100%;
+    background:rgba(8,28,23,0.92);
+    backdrop-filter:blur(8px);
+    z-index:100;
+    display:none;
+    align-items:center; justify-content:center;
+    padding:20px;
+    opacity:0; transition:opacity 0.25s ease;
+  }
+  .modal-overlay.active{display:flex; opacity:1;}
+  .modal-container{
+    background:var(--pcb-green-dark);
+    border:2px solid var(--copper);
+    width:100%; max-width:760px;
+    max-height:85vh; overflow-y:auto;
+    border-radius:var(--radius);
+    padding:30px;
+    position:relative;
+    box-shadow:0 10px 30px rgba(0,0,0,0.5);
+  }
+  .modal-close{
+    position:absolute; top:20px; right:20px;
+    background:transparent; border:1px solid var(--trace);
+    color:var(--silk-white); font-family:var(--font-mono);
+    font-size:18px; padding:4px 10px; cursor:pointer;
+    border-radius:var(--radius);
+  }
+  .modal-close:hover{border-color:var(--led-red); color:var(--led-red);}
+  .modal-ref{font-family:var(--font-mono); color:var(--copper); font-size:14px; margin-bottom:8px; display:block;}
+  .modal-title{font-family:var(--font-display); font-size:26px; font-weight:700; margin-bottom:16px; border-bottom:1px solid var(--trace); padding-bottom:12px;}
+  .modal-content{font-size:15px;}
+  .modal-content h4{font-family:var(--font-display); font-size:18px; margin:20px 0 10px; color:var(--copper);}
+  .modal-content p{color:var(--silk-dim); margin-bottom:12px;}
+  .modal-content ul{margin-left:20px; margin-bottom:16px; color:var(--silk-dim);}
+  .modal-content li{margin-bottom:6px;}
+
   /* FOOTER / CONTACT */
   footer{padding:60px 0 40px; text-align:center;}
   footer h2{font-family:var(--font-display); font-size:30px; margin-bottom:14px;}
@@ -144,6 +191,7 @@
   @media(prefers-reduced-motion: reduce){
     .led{transition:none;}
     .logo .dot{animation:none;}
+    .modal-overlay{transition:none;}
   }
 </style>
 </head>
@@ -153,9 +201,15 @@
   <div class="nav-inner">
     <div class="logo"><span class="dot"></span> SK.DOTSE // EMBEDDED</div>
     <nav class="links">
-      <a href="#about"><span class="lang-fr">Profil</span><span class="lang-en">About</span></a>
-      <a href="#projects"><span class="lang-fr">Projets</span><span class="lang-en">Projects</span></a>
-      <a href="#labs"><span class="lang-fr">Labs STM32</span><span class="lang-en">STM32 Labs</span></a>
+      <a href="#about">
+        <span class="lang-fr">Profil</span><span class="lang-en">About</span><span class="lang-de">Profil</span>
+      </a>
+      <a href="#projects">
+        <span class="lang-fr">Projets</span><span class="lang-en">Projects</span><span class="lang-de">Projekte</span>
+      </a>
+      <a href="#labs">
+        <span class="lang-fr">Labs STM32</span><span class="lang-en">STM32 Labs</span><span class="lang-de">STM32 Labs</span>
+      </a>
       <a href="#contact">Contact</a>
       <button class="lang-toggle" id="langToggle">EN</button>
     </nav>
@@ -168,18 +222,22 @@
     <div class="eyebrow">
       <span class="lang-fr">Étudiant ingénieur — Systèmes embarqués &amp; Validation Système</span>
       <span class="lang-en">Engineering Student — Embedded Systems &amp; System Validation</span>
+      <span class="lang-de">Ingenieurstudent — Embedded Systems &amp; Systemvalidierung</span>
     </div>
-    <h1><span class="lang-fr">Sylvanus <span>DOTSE</span></span><span class="lang-en">Sylvanus <span>DOTSE</span></span></h1>
+    <h1>Sylvanus <span>DOTSE</span></h1>
     <p class="tagline">
       <span class="lang-fr">Je conçois des bancs de test, j'automatise des séquences de validation et je programme des systèmes embarqués STM32. Basé à Brest, ouvert à l'international.</span>
       <span class="lang-en">I build test benches, automate validation sequences, and program STM32 embedded systems. Based in Brest, open to international opportunities.</span>
+      <span class="lang-de">Ich entwickle Teststände, automatisiere Validierungssequenzen und programmiere STM32 Embedded Systems. Ansässig in Brest, offen für internationale Angebote.</span>
     </p>
     <div class="cta-row">
       <a href="#projects" class="btn btn-primary">
-        <span class="lang-fr">Voir mes projets</span><span class="lang-en">View my projects</span>
+        <span class="lang-fr">Voir mes projets</span><span class="lang-en">View my projects</span><span class="lang-de">Projekte ansehen</span>
       </a>
       <a href="https://github.com/sylvanusdotse04-jpg" target="_blank" rel="noopener" class="btn btn-ghost">GitHub ↗</a>
-      <a href="#contact" class="btn btn-ghost"><span class="lang-fr">Me contacter</span><span class="lang-en">Get in touch</span></a>
+      <a href="#contact" class="btn btn-ghost">
+        <span class="lang-fr">Me contacter</span><span class="lang-en">Get in touch</span><span class="lang-de">Kontakt</span>
+      </a>
     </div>
     <div class="chaser" id="chaser">
       <div class="led"></div><div class="led"></div><div class="led"></div><div class="led"></div>
@@ -189,98 +247,194 @@
   </section>
 
   <section id="about">
-    <div class="sec-head"><span class="ref">§01</span><h2><span class="lang-fr">Profil</span><span class="lang-en">About</span></h2></div>
+    <div class="sec-head">
+      <span class="ref">§01</span>
+      <h2>
+        <span class="lang-fr">Profil</span><span class="lang-en">About</span><span class="lang-de">Über mich</span>
+      </h2>
+    </div>
     <div class="about-grid">
       <div>
         <p>
           <span class="lang-fr">Actuellement en cycle ingénieur généraliste à l'ISEN Brest, je me spécialise en électronique, systèmes embarqués, informatique industrielle et traitement du signal. Je recherche un contrat d'alternance en Validation Système dans le secteur automobile.</span>
           <span class="lang-en">Currently in the generalist engineering program at ISEN Brest, specializing in electronics, embedded systems, industrial computing and signal processing. I'm looking for a work-study contract in System Validation within the automotive sector.</span>
+          <span class="lang-de">Derzeit im allgemeinen Ingenieurstudium am ISEN Brest, spezialisiert auf Elektronik, Embedded Systems, technische Informatik und Signalverarbeitung. Ich suche eine Werkstudententätigkeit oder duales Studium im Bereich Systemvalidierung in der Automobilbranche.</span>
         </p>
         <p>
           <span class="lang-fr">Mon terrain de jeu : les microcontrôleurs STM32, l'instrumentation de mesure (oscilloscope, multimètre, analyseur logique) et l'automatisation de séquences de test en Python. Anglais natif, environnement international.</span>
           <span class="lang-en">My playground: STM32 microcontrollers, measurement instrumentation (oscilloscope, multimeter, logic analyzer) and Python-based test sequence automation. Native English speaker, comfortable in international environments.</span>
+          <span class="lang-de">Mein Fokus: STM32-Mikrocontroller, Messtechnik (Oszilloskop, Multimeter, Logikanalysator) und die Automatisierung von Testsequenzen mit Python. Muttersprache Englisch, bereit für ein internationales Umfeld.</span>
         </p>
       </div>
       <div class="datasheet">
         <div class="ds-row"><div class="ds-key">MCU</div><div class="ds-val">STM32 (Timers, ADC, PWM)</div></div>
-        <div class="ds-row"><div class="ds-key"><span class="lang-fr">LANGAGES</span><span class="lang-en">LANGUAGES</span></div><div class="ds-val">C · Python · C#</div></div>
+        <div class="ds-row">
+          <div class="ds-key"><span class="lang-fr">LANGAGES</span><span class="lang-en">LANGUAGES</span><span class="lang-de">SPRACHEN</span></div>
+          <div class="ds-val">C · Python · C#</div>
+        </div>
         <div class="ds-row"><div class="ds-key">BUS</div><div class="ds-val">CAN · LIN</div></div>
-        <div class="ds-row"><div class="ds-key"><span class="lang-fr">INSTRUM.</span><span class="lang-en">INSTRUM.</span></div><div class="ds-val">Oscilloscope · Multimètre · Analyseur logique</div></div>
-        <div class="ds-row"><div class="ds-key"><span class="lang-fr">AUTOMATISME</span><span class="lang-en">AUTOMATION</span></div><div class="ds-val">Grafcet · Ladder</div></div>
-        <div class="ds-row"><div class="ds-key"><span class="lang-fr">LANGUES</span><span class="lang-en">SPOKEN</span></div><div class="ds-val"><span class="lang-fr">Anglais (natif) · Français (courant) · Allemand (élémentaire)</span><span class="lang-en">English (native) · French (fluent) · German (elementary)</span></div></div>
+        <div class="ds-row">
+          <div class="ds-key"><span class="lang-fr">INSTRUM.</span><span class="lang-en">INSTRUM.</span><span class="lang-de">GERÄTE</span></div>
+          <div class="ds-val">Oscilloscope · Multimètre · Analyseur logique</div>
+        </div>
+        <div class="ds-row">
+          <div class="ds-key"><span class="lang-fr">AUTOMATISME</span><span class="lang-en">AUTOMATION</span><span class="lang-de">AUTOMATISIERUNG</span></div>
+          <div class="ds-val">Grafcet · Ladder</div>
+        </div>
+        <div class="ds-row">
+          <div class="ds-key"><span class="lang-fr">LANGUES</span><span class="lang-en">SPOKEN</span><span class="lang-de">FREMDSPRACHEN</span></div>
+          <div class="ds-val">
+            <span class="lang-fr">Anglais (natif) · Français (courant) · Allemand (élémentaire)</span>
+            <span class="lang-en">English (native) · French (fluent) · German (elementary)</span>
+            <span class="lang-de">Englisch (Muttersprache) · Französisch (fließend) · Deutsch (Grundkenntnisse)</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <section id="projects">
-    <div class="sec-head"><span class="ref">§02</span><h2><span class="lang-fr">Projets principaux</span><span class="lang-en">Featured projects</span></h2></div>
+    <div class="sec-head">
+      <span class="ref">§02</span>
+      <h2>
+        <span class="lang-fr">Projets principaux</span><span class="lang-en">Featured projects</span><span class="lang-de">Hauptprojekte</span>
+      </h2>
+    </div>
 
-    <div class="proj-card">
+    <div class="proj-card" onclick="openModal('u1')">
       <div class="proj-top">
-        <h3><span class="lang-fr">Banc de Test Électronique</span><span class="lang-en">Electronic Test Bench</span></h3>
+        <h3>
+          <span class="lang-fr">Banc de Test Électronique</span>
+          <span class="lang-en">Electronic Test Bench</span>
+          <span class="lang-de">Elektronischer Prüfstand</span>
+        </h3>
         <span class="proj-ref">U1</span>
       </div>
       <p>
         <span class="lang-fr">Conception d'un banc de test dédié à la validation fonctionnelle de circuits : automatisation et déploiement de séquences de tests génériques via scripts Python, analyse de signaux à l'oscilloscope, diagnostic et vérification de continuité.</span>
         <span class="lang-en">Design of a test bench for functional circuit validation: automation and deployment of generic test sequences via Python scripts, oscilloscope signal analysis, diagnostics and continuity checks.</span>
+        <span class="lang-de">Entwurf eines Prüfstands zur funktionellen Schaltungsvalidierung: Automatisierung und Implementierung generischer Testsequenzen über Python-Skripte, Oszilloskop-Signalanalysen und Kontinuitätsprüfung.</span>
       </p>
-      <div class="tags"><span class="tag">Python</span><span class="tag">Oscilloscope</span><span class="tag"><span class="lang-fr">Automatisation</span><span class="lang-en">Automation</span></span><span class="tag">ISEN Brest</span></div>
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">Oscilloscope</span>
+        <span class="tag"><span class="lang-fr">Automatisation</span><span class="lang-en">Automation</span><span class="lang-de">Automatisierung</span></span>
+        <span class="tag">ISEN Brest</span>
+      </div>
+      <span class="click-info">
+        <span class="lang-fr">Détails de la fiche technique ↗</span>
+        <span class="lang-en">View datasheet ↗</span>
+        <span class="lang-de">Datenblatt anzeigen ↗</span>
+      </span>
     </div>
 
-    <div class="proj-card">
+    <div class="proj-card" onclick="openModal('u2')">
       <div class="proj-top">
-        <h3><span class="lang-fr">Système Embarqué de Régulation Thermique</span><span class="lang-en">Embedded Thermal Regulation System</span></h3>
+        <h3>
+          <span class="lang-fr">Système Embarqué de Régulation Thermique</span>
+          <span class="lang-en">Embedded Thermal Regulation System</span>
+          <span class="lang-de">Eingebettetes Temperaturregelsystem</span>
+        </h3>
         <span class="proj-ref">U2</span>
       </div>
       <p>
         <span class="lang-fr">Application mêlant électronique de mesure et logiciel embarqué : programmation bas niveau sur cible STM32 (Timers, ADC, PWM), conception de la chaîne d'acquisition analogique et validation du comportement à l'aide d'outils de métrologie.</span>
         <span class="lang-en">Application combining measurement electronics and embedded software: low-level STM32 programming (Timers, ADC, PWM), analog acquisition chain design, and behavior validation using metrology tools.</span>
+        <span class="lang-de">System aus Messelektronik und Embedded Software: hardwarenahe STM32-Programmierung (Timer, ADC, PWM), Entwurf der analogen Erfassungskette und messtechnische Verhaltensvalidierung.</span>
       </p>
-      <div class="tags"><span class="tag">STM32</span><span class="tag">ADC/PWM</span><span class="tag"><span class="lang-fr">Capteurs</span><span class="lang-en">Sensors</span></span><span class="tag">ISEN Brest</span></div>
+      <div class="tags">
+        <span class="tag">STM32</span>
+        <span class="tag">ADC/PWM</span>
+        <span class="tag"><span class="lang-fr">Capteurs</span><span class="lang-en">Sensors</span><span class="lang-de">Sensoren</span></span>
+        <span class="tag">ISEN Brest</span>
+      </div>
+      <span class="click-info">
+        <span class="lang-fr">Détails de la fiche technique ↗</span>
+        <span class="lang-en">View datasheet ↗</span>
+        <span class="lang-de">Datenblatt anzeigen ↗</span>
+      </span>
     </div>
 
-    <div class="proj-card">
+    <div class="proj-card" onclick="openModal('u3')">
       <div class="proj-top">
-        <h3><span class="lang-fr">Séquences de Commande — Automatisme</span><span class="lang-en">Control Sequences — Automation</span></h3>
+        <h3>
+          <span class="lang-fr">Séquences de Commande — Automatisme</span>
+          <span class="lang-en">Control Sequences — Automation</span>
+          <span class="lang-de">Steuerungssequenzen — Automatisierung</span>
+        </h3>
         <span class="proj-ref">U3</span>
       </div>
       <p>
         <span class="lang-fr">Modélisation et validation de cycles logiques pour actionneurs : structures Grafcet pour la gestion d'états, simulation numérique des séquences et vérification de la robustesse logique.</span>
         <span class="lang-en">Modeling and validation of logic cycles for actuators: Grafcet structures for state management, digital sequence simulation, and logic robustness verification.</span>
+        <span class="lang-de">Modellierung und Validierung von logischen Abläufen für Aktoren: Grafcet-Strukturen für das Zustandsmanagement, digitale Sequenzsimulation und Prüfung der Logikrobustheit.</span>
       </p>
-      <div class="tags"><span class="tag">Grafcet</span><span class="tag">Ladder</span><span class="tag"><span class="lang-fr">Simulation</span><span class="lang-en">Simulation</span></span><span class="tag">ISEN Brest</span></div>
+      <div class="tags">
+        <span class="tag">Grafcet</span>
+        <span class="tag">Ladder</span>
+        <span class="tag"><span class="lang-fr">Simulation</span><span class="lang-en">Simulation</span><span class="lang-de">Simulation</span></span>
+        <span class="tag">ISEN Brest</span>
+      </div>
+      <span class="click-info">
+        <span class="lang-fr">Détails de la fiche technique ↗</span>
+        <span class="lang-en">View datasheet ↗</span>
+        <span class="lang-de">Datenblatt anzeigen ↗</span>
+      </span>
     </div>
   </section>
 
   <section id="labs">
-    <div class="sec-head"><span class="ref">§03</span><h2><span class="lang-fr">Labs STM32</span><span class="lang-en">STM32 Labs</span></h2></div>
+    <div class="sec-head">
+      <span class="ref">§03</span>
+      <h2>
+        <span class="lang-fr">Labs STM32</span><span class="lang-en">STM32 Labs</span><span class="lang-de">STM32 Labs</span>
+      </h2>
+    </div>
     <div class="labs-grid" id="labsGrid"></div>
     <p class="labs-note">
       <span class="lang-fr">// Travaux pratiques réalisés dans le cadre scolaire sur cible STM32. Code source à venir sur GitHub.</span>
       <span class="lang-en">// Coursework exercises on STM32 target. Source code coming soon on GitHub.</span>
+      <span class="lang-de">// Studienarbeiten auf STM32-Zielsystemen. Quellcode demnächst auf GitHub verfügbar.</span>
     </p>
   </section>
 
   <section id="experience">
-    <div class="sec-head"><span class="ref">§04</span><h2><span class="lang-fr">Expérience</span><span class="lang-en">Experience</span></h2></div>
+    <div class="sec-head">
+      <span class="ref">§04</span>
+      <h2>
+        <span class="lang-fr">Expérience</span><span class="lang-en">Experience</span><span class="lang-de">Berufserfahrung</span>
+      </h2>
+    </div>
     <div class="exp-item">
-      <div class="exp-date">2025<span class="lang-fr"> — Juin/Août</span><span class="lang-en"> — Jun/Aug</span></div>
+      <div class="exp-date">2025<span class="lang-fr"> — Juin/Août</span><span class="lang-en"> — Jun/Aug</span><span class="lang-de"> — Jun/Aug</span></div>
       <div>
-        <h4><span class="lang-fr">Assistant Conducteur de Travaux</span><span class="lang-en">Site Supervision Assistant</span></h4>
+        <h4>
+          <span class="lang-fr">Assistant Conducteur de Travaux</span>
+          <span class="lang-en">Site Supervision Assistant</span>
+          <span class="lang-de">Assistent der Bauleitung</span>
+        </h4>
         <p>Master Builder — Lomé, Togo</p>
       </div>
     </div>
     <div class="exp-item">
-      <div class="exp-date">2024<span class="lang-fr"> — Juil/Août</span><span class="lang-en"> — Jul/Aug</span></div>
+      <div class="exp-date">2024<span class="lang-fr"> — Juil/Août</span><span class="lang-en"> — Jul/Aug</span><span class="lang-de"> — Jul/Aug</span></div>
       <div>
-        <h4><span class="lang-fr">Responsable d'Équipe / Animateur</span><span class="lang-en">Team Lead / Activity Coordinator</span></h4>
+        <h4>
+          <span class="lang-fr">Responsable d'Équipe / Animateur</span>
+          <span class="lang-en">Team Lead / Activity Coordinator</span>
+          <span class="lang-de">Teamleiter / Betreuer</span>
+        </h4>
         <p>Centre Social Les Amarres — Brest</p>
       </div>
     </div>
     <div class="exp-item">
       <div class="exp-date">2024–2025</div>
       <div>
-        <h4><span class="lang-fr">Équipier Polyvalent</span><span class="lang-en">Team Member</span></h4>
+        <h4>
+          <span class="lang-fr">Équipier Polyvalent</span>
+          <span class="lang-en">Team Member</span>
+          <span class="lang-de">Allround-Mitarbeiter</span>
+        </h4>
         <p>KFC — Brest</p>
       </div>
     </div>
@@ -288,12 +442,24 @@
 
 </main>
 
+<div class="modal-overlay" id="projectModal" onclick="closeModalOnOverlay(event)">
+  <div class="modal-container">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <span class="modal-ref" id="mRef"></span>
+    <h3 class="modal-title" id="mTitle"></h3>
+    <div class="modal-content" id="mContent"></div>
+  </div>
+</div>
+
 <footer id="contact">
   <div class="wrap">
-    <h2><span class="lang-fr">Discutons</span><span class="lang-en">Let's talk</span></h2>
+    <h2>
+      <span class="lang-fr">Discutons</span><span class="lang-en">Let's talk</span><span class="lang-de">Lass uns reden</span>
+    </h2>
     <p>
       <span class="lang-fr">Ouvert à un contrat d'alternance en Validation Système / Systèmes Embarqués dès septembre 2026.</span>
       <span class="lang-en">Open to a work-study contract in System Validation / Embedded Systems starting September 2026.</span>
+      <span class="lang-de">Offen für ein duales Studium oder eine Werkstudententätigkeit im Bereich Systemvalidierung / Embedded Systems ab September 2026.</span>
     </p>
     <div class="contact-row">
       <a class="btn btn-primary" href="mailto:komi-sylvanus.dotse@isen-ouest.yncrea.fr">Email ↗</a>
@@ -304,12 +470,33 @@
 </footer>
 
 <script>
-  // Lang toggle
+  // Sélecteur de langue cyclique (FR -> EN -> DE -> FR)
   const btn = document.getElementById('langToggle');
+  const languages = ['fr', 'en', 'de'];
+  let currentLangIdx = 0;
+
   btn.addEventListener('click', () => {
-    const isEn = document.body.classList.toggle('en');
-    btn.textContent = isEn ? 'FR' : 'EN';
-    document.documentElement.lang = isEn ? 'en' : 'fr';
+    currentLangIdx = (currentLangIdx + 1) % languages.length;
+    const selectedLang = languages[currentLangIdx];
+
+    // Nettoyer les classes existantes
+    document.body.classList.remove('en', 'de');
+    
+    if (selectedLang === 'en') {
+      document.body.classList.add('en');
+      btn.textContent = 'DE'; // Prochaine langue disponible au clic
+      document.documentElement.lang = 'en';
+    } else if (selectedLang === 'de') {
+      document.body.classList.add('de');
+      btn.textContent = 'FR';
+      document.documentElement.lang = 'de';
+    } else {
+      btn.textContent = 'EN';
+      document.documentElement.lang = 'fr';
+    }
+    
+    // Mettre à jour la grille des Labs avec la nouvelle langue
+    renderLabs();
   });
 
   // LED chaser animation (hero)
@@ -321,28 +508,266 @@
     idx++;
   }, 220);
 
-  // STM32 labs data
+  // STM32 labs data (FR, EN, DE)
   const labs = [
-    {ref:'L01', fr:'Clignotement LED', en:'LED blinking'},
-    {ref:'L02', fr:'Chenillard 8 LEDs', en:'8-LED chaser'},
-    {ref:'L03', fr:'Commande LED par bouton poussoir', en:'LED control via push button'},
-    {ref:'L04', fr:'Clignotant marche/arrêt sous interruption', en:'On/off blinker using interrupts'},
-    {ref:'L05', fr:'Affichage d\'une valeur sur afficheur 7 segments', en:'Value display on 7-segment display'},
-    {ref:'L06', fr:'Défilement de mot sur écran', en:'Scrolling text on display'},
-    {ref:'L07', fr:'Génération de signaux PWM', en:'PWM signal generation'},
-    {ref:'L08', fr:'LED à luminosité croissante et décroissante', en:'LED with rising/falling brightness'},
-    {ref:'L09', fr:'Lecture d\'une mélodie', en:'Playing a melody'},
-    {ref:'L10', fr:'Affichage d\'un nombre puis d\'une chaîne sur écran TFT graphique', en:'Number then string display on graphic TFT screen'},
-    {ref:'L11', fr:'Affichage de l\'heure sur écran TFT', en:'Time display on TFT screen'},
+    {ref:'L01', fr:'Clignotement LED', en:'LED blinking', de:'LED-Blinken'},
+    {ref:'L02', fr:'Chenillard 8 LEDs', en:'8-LED chaser', de:'8-LED-Lauflicht'},
+    {ref:'L03', fr:'Commande LED par bouton poussoir', en:'LED control via push button', de:'LED-Steuerung über Taster'},
+    {ref:'L04', fr:'Clignotant marche/arrêt sous interruption', en:'On/off blinker using interrupts', de:'Ein/Aus-Blinker über Interrupts'},
+    {ref:'L05', fr:'Affichage d\'une valeur sur afficheur 7 segments', en:'Value display on 7-segment display', de:'Wertanzeige auf 7-Segment-Anzeige'},
+    {ref:'L06', fr:'Défilement de mot sur écran', en:'Scrolling text on display', de:'Lauftext auf dem Display'},
+    {ref:'L07', fr:'Génération de signaux PWM', en:'PWM signal generation', de:'PWM-Signalerzeugung'},
+    {ref:'L08', fr:'LED à luminosité croissante et décroissante', en:'LED with rising/falling brightness', de:'Dimmbare LED (ansteigende/abfallende Helligkeit)'},
+    {ref:'L09', fr:'Lecture d\'une mélodie', en:'Playing a melody', de:'Abspielen einer Melodie'},
+    {ref:'L10', fr:'Affichage d\'un nombre puis d\'une chaîne sur écran TFT graphique', en:'Number then string display on graphic TFT screen', de:'Nummern- und Textanzeige auf TFT-Grafikbildschirm'},
+    {ref:'L11', fr:'Affichage de l\'heure sur écran TFT', en:'Time display on TFT screen', de:'Zeitanzeige auf TFT-Bildschirm'},
   ];
+
   const grid = document.getElementById('labsGrid');
-  grid.innerHTML = labs.map(l => `
-    <div class="lab-card">
-      <span class="lab-ref">${l.ref}</span>
-      <h4><span class="lang-fr">${l.fr}</span><span class="lang-en">${l.en}</span></h4>
-      <span class="mcu">STM32 · <span class="lang-fr">TP École</span><span class="lang-en">Coursework</span></span>
-    </div>
-  `).join('');
+  
+  function renderLabs() {
+    const isEn = document.body.classList.contains('en');
+    const isDe = document.body.classList.contains('de');
+    
+    grid.innerHTML = labs.map(l => {
+      let title = l.fr;
+      let tagText = "TP École";
+      if (isEn) {
+        title = l.en;
+        tagText = "Coursework";
+      } else if (isDe) {
+        title = l.de;
+        tagText = "Studienarbeit";
+      }
+      return `
+        <div class="lab-card">
+          <span class="lab-ref">${l.ref}</span>
+          <h4>${title}</h4>
+          <span class="mcu">STM32 · <span>${tagText}</span></span>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // Premier rendu
+  renderLabs();
+
+  // DONNÉES DES PROJETS DU BANC DE TEST ET DE RÉGULATION (TRILINGUE)
+  const projectDetails = {
+    u1: {
+      ref: 'U1 // DATASHEET SYSTEM',
+      fr: {
+        title: "Banc de Test Électronique — Validation & Métrologie",
+        content: `
+          <p><strong>Type :</strong> Projet académique de synthèse — ISEN Brest</p>
+          <p>Ce projet consiste en la conception, l'interfaçage et l'exploitation d'un banc de test dédié à la validation fonctionnelle de cartes et composants électroniques. Le système couple l'instrumentation de mesure physique, le conditionnement analogique/numérique, et le pilotage automatisé.</p>
+          
+          <h4>1. Électronique Analogique</h4>
+          <ul>
+            <li><strong>Conditionnement de signal :</strong> Design d'amplificateurs opérationnels (AOP) en montages soustracteurs et filtres passe-bas actifs pour nettoyer et calibrer les mesures de tension et de courant provenant des capteurs.</li>
+            <li><strong>Protection :</strong> Conception de circuits de limitation (diodes Zener, optocoupleurs) pour isoler électriquement la partie puissance de l'unité de commande logique.</li>
+          </ul>
+
+          <h4>2. Électronique Numérique & Interfaçage</h4>
+          <ul>
+            <li><strong>Multiplexage :</strong> Utilisation de multiplexeurs analogiques/numériques permettant de router différents points de test de la carte cible vers un canal de mesure unique.</li>
+            <li><strong>Réseau & Registres :</strong> Intégration de registres à décalage pour maximiser le nombre de voies d'E/S exploitables sur le processeur de contrôle.</li>
+          </ul>
+
+          <h4>3. Informatique Industrielle (Langage C & Python)</h4>
+          <ul>
+            <li><strong>Firmware C :</strong> Écriture du code d'acquisition embarqué gérant les Timers pour l'échantillonnage régulier, le déclenchement des convertisseurs Analogique-Numérique (ADC) et la communication avec l'hôte.</li>
+            <li><strong>Automatisation Python :</strong> Scripting d'une séquence de test séquentielle. Le script pilote l'instrumentation de laboratoire, configure les scénarios d'entrée via des commandes de contrôle, puis récupère et parse les données d'oscilloscopes pour générer un rapport de conformité automatique (Pass/Fail).</li>
+          </ul>
+        `
+      },
+      en: {
+        title: "Electronic Test Bench — Validation & Metrology",
+        content: `
+          <p><strong>Type:</strong> Academic Capstone Project — ISEN Brest</p>
+          <p>This project involved designing, interfacing, and operating a test bench dedicated to the functional validation of electronic boards and components. The system couples physical measurement instrumentation, analog/digital conditioning, and automated sequencing.</p>
+          
+          <h4>1. Analog Electronics</h4>
+          <ul>
+            <li><strong>Signal Conditioning:</strong> Design of operational amplifiers (Op-Amps) in subtractor and active low-pass filter configurations to clean and scale voltage/current measurements from sensors.</li>
+            <li><strong>Protection Circuitry:</strong> Implementing clamp circuits (Zener diodes, optocouplers) to electrically isolate power loops from the logical control unit.</li>
+          </ul>
+
+          <h4>2. Digital Electronics & Interfacing</h4>
+          <ul>
+            <li><strong>Multiplexing:</strong> Use of analog/digital multiplexers to route different test points of the target board to a single, high-accuracy measurement channel.</li>
+            <li><strong>Shift Registers:</strong> Integrating Shift Registers to optimize and expand IO pins available on the control processor.</li>
+          </ul>
+
+          <h4>3. Industrial Computing (C & Python)</h4>
+          <ul>
+            <li><strong>Embedded C Firmware:</strong> Writing low-level target code managing hardware Timers for precise sampling, triggering Analog-to-Digital Converters (ADC), and serial data framing.</li>
+            <li><strong>Python Automation:</strong> Scripting automated sequencers to configure and trigger stimuli, capture scope and multimeter data, verify criteria limits, and generate validation run reports (Pass/Fail).</li>
+          </ul>
+        `
+      },
+      de: {
+        title: "Elektronischer Prüfstand — Validierung & Metrologie",
+        content: `
+          <p><strong>Typ:</strong> Studienprojekt — ISEN Brest</p>
+          <p>Dieses Projekt umfasst den Entwurf, die Schnittstellensteuerung und den Betrieb eines Prüfstands zur funktionalen Validierung elektronischer Baugruppen. Das System verbindet physikalische Messtechnik, analoge/digitale Signalaufbereitung und automatisierte Ablaufsteuerung.</p>
+          
+          <h4>1. Analoge Elektronik</h4>
+          <ul>
+            <li><strong>Signalaufbereitung:</strong> Entwurf von Operationsverstärkern (OPV) als Subtrahierer und aktive Tiefpassfilter zur Bereinigung und Skalierung von Sensor-Spannungs- und Strommessungen.</li>
+            <li><strong>Schutzschaltungen:</strong> Implementierung von Begrenzerschaltungen (Zenerdioden, Optokoppler) zur galvanischen Trennung des Leistungskreises von der logischen Steuereinheit.</li>
+          </ul>
+
+          <h4>2. Digitale Elektronik & Schnittstellen</h4>
+          <ul>
+            <li><strong>Multiplexing:</strong> Einsatz analoger und digitaler Multiplexer, um verschiedene Testpunkte der Zielplatine auf einen einzigen hochpräzisen Messkanal zu routen.</li>
+            <li><strong>Schieberegister:</strong> Integration von Schieberegistern zur Optimierung und Erweiterung der verfügbaren I/O-Pins des Steuerprozessors.</li>
+          </ul>
+
+          <h4>3. Technische Informatik (C & Python)</h4>
+          <ul>
+            <li><strong>Embedded C Firmware:</strong> Erstellung hardwarenaher Firmware unter Verwendung interner Timer für präzise Abtastung, Ansteuerung der Analog-Digital-Wandler (ADC) und serielle Datenübertragung.</li>
+            <li><strong>Python-Automatisierung:</strong> Skripting automatisierter Testsequenzen zur Steuerung der Laborgeräte, Vorgabe von Stimuli, Auswertung von Oszilloskopdaten und automatischer Erstellung von Konformitätsberichten (Pass/Fail).</li>
+          </ul>
+        `
+      }
+    },
+    u2: {
+      ref: 'U2 // DATASHEET SYSTEM',
+      fr: {
+        title: "Régulation Thermique Embarquée",
+        content: `
+          <p><strong>Type :</strong> Projet de régulation de processus — ISEN Brest</p>
+          <p>Réalisation d'un système de contrôle de température autonome combinant acquisition de capteurs de précision, traitement temps-réel et actionneurs de puissance.</p>
+          
+          <h4>Architecture du Système</h4>
+          <ul>
+            <li><strong>Acquisition :</strong> Lecture de capteurs de température analogiques via l'ADC d'un STM32, avec filtrage numérique des bruits de ligne (filtre moyenneur).</li>
+            <li><strong>Traitement (C embarqué) :</strong> Implémentation d'un algorithme de contrôle en boucle fermée. Gestion des interruptions matérielles pour garantir la périodicité stricte de l'acquisition thermique.</li>
+            <li><strong>Actionneur :</strong> Génération d'un signal PWM (Modulation d'impulsion) pour moduler la puissance d'un élément chauffant via un transistor MOSFET de puissance.</li>
+          </ul>
+        `
+      },
+      en: {
+        title: "Embedded Thermal Regulation",
+        content: `
+          <p><strong>Type:</strong> Process Control Project — ISEN Brest</p>
+          <p>Development of an autonomous temperature control system combining precision sensor acquisition, real-time loop processing, and power actuators.</p>
+          
+          <h4>System Architecture</h4>
+          <ul>
+            <li><strong>Acquisition:</strong> Processing analog temperature sensor outputs using STM32 ADC channels, coupled with digital filtering (moving average) to block line noise.</li>
+            <li><strong>Processing (Embedded C):</strong> Implementation of a closed-loop control algorithm, backed by hardware interrupts to guarantee precise time-step execution.</li>
+            <li><strong>Actuation:</strong> Adjusting heating elements using dynamic PWM (Pulse Width Modulation) driver signals applied to a power MOSFET switch.</li>
+          </ul>
+        `
+      },
+      de: {
+        title: "Eingebettete Temperaturregelung",
+        content: `
+          <p><strong>Typ:</strong> Prozessregelungsprojekt — ISEN Brest</p>
+          <p>Entwicklung eines autonomen Temperaturregelungssystems, das präzise Sensorwerterfassung, Echtzeit-Regelschleifen und Leistungsaktoren kombiniert.</p>
+          
+          <h4>Systemarchitektur</h4>
+          <ul>
+            <li><strong>Erfassung:</strong> Auslesen analoger Temperatursensoren über den ADC eines STM32, inklusive digitaler Filterung (gleitender Mittelwert) zur Unterdrückung von Leitungsrauschen.</li>
+            <li><strong>Verarbeitung (Embedded C):</strong> Implementierung eines geschlossenen Regelkreises. Nutzung von Hardware-Interrupts, um eine strikt periodische Temperaturerfassung zu garantieren.</li>
+            <li><strong>Aktorik:</strong> Steuerung des Heizelements mittels dynamischer Pulsweitenmodulation (PWM) über einen Leistungs-MOSFET.</li>
+          </ul>
+        `
+      }
+    },
+    u3: {
+      ref: 'U3 // CONTROL LOGIC',
+      fr: {
+        title: "Séquences de Commande Automatisées",
+        content: `
+          <p><strong>Type :</strong> TP & Étude Automatisme — ISEN Brest</p>
+          <p>Étude et modélisation logicielle de chaînes de production ou de cycles de sécurité automatisés via des logiques industrielles normalisées.</p>
+          
+          <h4>Compétences Clés</h4>
+          <ul>
+            <li><strong>Modélisation Grafcet :</strong> Traduction de cahiers des charges complexes en graphes d'états transitionnels (étapes, réceptivités, actions associées).</li>
+            <li><strong>Logique Ladder :</strong> Programmation d'automates virtuels/réels en langage de contact (contacts, bobines, temporisateurs).</li>
+            <li><strong>Vérification :</strong> Simulation numérique des cas d'erreurs (capteurs défaillants, arrêts d'urgence) pour garantir la sécurité et la continuité du fonctionnement.</li>
+          </ul>
+        `
+      },
+      en: {
+        title: "Automated Control Sequences",
+        content: `
+          <p><strong>Type:</strong> Labwork & Automation Study — ISEN Brest</p>
+          <p>Modeling and simulating factory production lines or safety shutdown procedures using standardized industrial automation languages.</p>
+          
+          <h4>Key Technical Areas</h4>
+          <ul>
+            <li><strong>Grafcet Modeling:</strong> Translating operational requirements into transition-based state machines (steps, events, synchronized actions).</li>
+            <li><strong>Ladder Logic:</strong> Implementing program blocks using logic contacts, rungs, timers, and counters for PLC platforms.</li>
+            <li><strong>Robustness Checks:</strong> Simulating fault injection (sensor loss, emergency stops) to validate system safe-states and recovery protocols.</li>
+          </ul>
+        `
+      },
+      de: {
+        title: "Automatisierte Steuerungssequenzen",
+        content: `
+          <p><strong>Typ:</strong> Laborübungen & Automatisierungsstudie — ISEN Brest</p>
+          <p>Modellierung und Software-Simulation von Produktionslinien oder sicherheitskritischen Abschaltzyklen mittels standardisierter industrieller Steuerungslogiken.</p>
+          
+          <h4>Schlüsselkompetenzen</h4>
+          <ul>
+            <li><strong>Grafcet-Modellierung:</strong> Übersetzung komplexer Lastenhefte in zustandsbasierte Ablaufsteuerungen (Schritte, Bedingungen, zugeordnete Aktionen).</li>
+            <li><strong>Ladder-Logik (Kontaktplan):</strong> Programmierung virtueller oder realer SPS mittels Kontaktplänen (Kontakte, Spulen, Timer).</li>
+            <li><strong>Validierung:</strong> Simulation von Fehlerszenarien (Sensorausfall, Not-Aus), um den sicheren Systemzustand und die Ausfallsicherheit zu gewährleisten.</li>
+          </ul>
+        `
+      }
+    }
+  };
+
+  const modal = document.getElementById('projectModal');
+  const mRef = document.getElementById('mRef');
+  const mTitle = document.getElementById('mTitle');
+  const mContent = document.getElementById('mContent');
+
+  function openModal(projectId) {
+    const isEn = document.body.classList.contains('en');
+    const isDe = document.body.classList.contains('de');
+    const project = projectDetails[projectId];
+    
+    if (project) {
+      mRef.textContent = project.ref;
+      if (isEn) {
+        mTitle.textContent = project.en.title;
+        mContent.innerHTML = project.en.content;
+      } else if (isDe) {
+        mTitle.textContent = project.de.title;
+        mContent.innerHTML = project.de.content;
+      } else {
+        mTitle.textContent = project.fr.title;
+        mContent.innerHTML = project.fr.content;
+      }
+      
+      modal.style.display = 'flex';
+      setTimeout(() => {
+        modal.classList.add('active');
+      }, 10);
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeModal() {
+    modal.classList.remove('active');
+    setTimeout(() => {
+      modal.style.display = 'none';
+    }, 250);
+    document.body.style.overflow = '';
+  }
+
+  function closeModalOnOverlay(e) {
+    if (e.target === modal) {
+      closeModal();
+    }
+  }
 </script>
 
 </body>
