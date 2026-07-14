@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sylvanus DOTSE — Embedded Systems Portfolio</title>
+<meta name="description" content="Portfolio de Sylvanus Dotse, étudiant ingénieur en systèmes embarqués et validation système.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pcb-green:#0d2b22;
+    --pcb-green-dark:#081c17;
+    --silk-white:#eef3ee;
+    --silk-dim:#a9beb2;
+    --copper:#e7b654;
+    --copper-dim:#b98f3d;
+    --led-green:#3ddc84;
+    --led-red:#ff5c5c;
+    --trace:#1c4536;
+    --radius:2px;
+    --font-display:'Space Grotesk', sans-serif;
+    --font-body:'IBM Plex Sans', sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:
+      linear-gradient(var(--trace) 1px, transparent 1px) 0 0/40px 40px,
+      linear-gradient(90deg, var(--trace) 1px, transparent 1px) 0 0/40px 40px,
+      var(--pcb-green);
+    background-blend-mode:overlay, overlay, normal;
+    color:var(--silk-white);
+    font-family:var(--font-body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .lang-en{display:none;}
+  body.en .lang-fr{display:none;}
+  body.en .lang-en{display:inline;}
+  .wrap{max-width:1040px; margin:0 auto; padding:0 24px;}
+
+  /* NAV */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(8,28,23,0.88);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--trace);
+  }
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:14px 24px; max-width:1040px; margin:0 auto;}
+  .logo{font-family:var(--font-mono); font-weight:600; font-size:15px; letter-spacing:0.5px; display:flex; align-items:center; gap:8px;}
+  .logo .dot{width:8px; height:8px; border-radius:50%; background:var(--led-green); box-shadow:0 0 6px var(--led-green); animation:blink 2.4s infinite;}
+  @keyframes blink{0%,100%{opacity:1;}50%{opacity:0.25;}}
+  nav.links{display:flex; gap:22px; align-items:center; font-family:var(--font-mono); font-size:13px;}
+  nav.links a{text-decoration:none; color:var(--silk-dim); transition:color .15s;}
+  nav.links a:hover{color:var(--copper);}
+  .lang-toggle{
+    font-family:var(--font-mono); font-size:12px; letter-spacing:1px;
+    background:transparent; border:1px solid var(--copper-dim); color:var(--copper);
+    padding:6px 10px; border-radius:var(--radius); cursor:pointer;
+  }
+  .lang-toggle:hover{background:var(--copper); color:var(--pcb-green-dark);}
+
+  /* HERO */
+  .hero{padding:90px 0 70px; position:relative; overflow:hidden;}
+  .eyebrow{font-family:var(--font-mono); font-size:12px; color:var(--copper); letter-spacing:2px; text-transform:uppercase; margin-bottom:18px;}
+  .hero h1{font-family:var(--font-display); font-size:clamp(38px,6vw,64px); font-weight:700; line-height:1.05; margin-bottom:14px;}
+  .hero h1 span{color:var(--led-green);}
+  .hero p.tagline{font-size:18px; color:var(--silk-dim); max-width:560px; margin-bottom:34px;}
+  .cta-row{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:56px;}
+  .btn{
+    font-family:var(--font-mono); font-size:13px; letter-spacing:0.5px;
+    padding:12px 20px; border-radius:var(--radius); text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px; transition:transform .15s, box-shadow .15s;
+  }
+  .btn-primary{background:var(--led-green); color:var(--pcb-green-dark); font-weight:600;}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 6px 18px rgba(61,220,132,0.25);}
+  .btn-ghost{border:1px solid var(--trace); color:var(--silk-white);}
+  .btn-ghost:hover{border-color:var(--copper); color:var(--copper);}
+
+  /* LED CHASER */
+  .chaser{display:flex; gap:10px; align-items:center;}
+  .led{width:16px; height:16px; border-radius:50%; background:#12291f; border:1px solid var(--trace); box-shadow:inset 0 0 4px rgba(0,0,0,0.6); transition:background .1s, box-shadow .1s;}
+  .led.on{background:var(--led-green); box-shadow:0 0 10px var(--led-green), 0 0 22px rgba(61,220,132,0.5);}
+  .chaser-label{font-family:var(--font-mono); font-size:11px; color:var(--silk-dim); margin-left:10px;}
+
+  /* SECTION HEADERS */
+  section{padding:64px 0; border-top:1px solid var(--trace);}
+  .sec-head{display:flex; align-items:baseline; gap:14px; margin-bottom:36px;}
+  .sec-head .ref{font-family:var(--font-mono); color:var(--copper); font-size:13px;}
+  .sec-head h2{font-family:var(--font-display); font-size:28px; font-weight:600;}
+  .status-led{width:8px; height:8px; border-radius:50%; background:var(--led-green); box-shadow:0 0 6px var(--led-green); flex-shrink:0;}
+
+  /* ABOUT */
+  .about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:40px;}
+  .about-grid p{color:var(--silk-dim); margin-bottom:14px;}
+  @media(max-width:720px){.about-grid{grid-template-columns:1fr;}}
+
+  /* DATASHEET SKILLS TABLE */
+  .datasheet{border:1px solid var(--trace); border-radius:var(--radius); overflow:hidden; font-family:var(--font-mono); font-size:13px;}
+  .ds-row{display:grid; grid-template-columns:170px 1fr; border-bottom:1px solid var(--trace);}
+  .ds-row:last-child{border-bottom:none;}
+  .ds-key{background:rgba(231,182,84,0.06); color:var(--copper); padding:12px 16px; font-weight:600;}
+  .ds-val{padding:12px 16px; color:var(--silk-white);}
+
+  /* FEATURED PROJECTS */
+  .proj-card{
+    border:1px solid var(--trace); border-radius:var(--radius); padding:26px;
+    margin-bottom:20px; background:rgba(238,243,238,0.02);
+    transition:border-color .15s;
+  }
+  .proj-card:hover{border-color:var(--copper-dim);}
+  .proj-top{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; margin-bottom:10px;}
+  .proj-ref{font-family:var(--font-mono); color:var(--copper); font-size:13px; white-space:nowrap;}
+  .proj-card h3{font-family:var(--font-display); font-size:20px; font-weight:600; margin-bottom:8px;}
+  .proj-card p{color:var(--silk-dim); margin-bottom:14px; font-size:14.5px;}
+  .tags{display:flex; flex-wrap:wrap; gap:8px;}
+  .tag{font-family:var(--font-mono); font-size:11px; padding:4px 9px; border:1px solid var(--trace); border-radius:20px; color:var(--silk-dim);}
+
+  /* LABS GRID */
+  .labs-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(230px,1fr)); gap:14px;}
+  .lab-card{border:1px solid var(--trace); border-radius:var(--radius); padding:16px; background:rgba(238,243,238,0.015);}
+  .lab-ref{font-family:var(--font-mono); font-size:11px; color:var(--copper-dim); margin-bottom:6px; display:block;}
+  .lab-card h4{font-size:14.5px; font-weight:600; margin-bottom:6px; line-height:1.35;}
+  .lab-card span.mcu{font-family:var(--font-mono); font-size:10.5px; color:var(--silk-dim);}
+  .labs-note{font-family:var(--font-mono); font-size:12px; color:var(--silk-dim); margin-top:20px; border-left:2px solid var(--copper-dim); padding-left:12px;}
+
+  /* EXPERIENCE */
+  .exp-item{display:grid; grid-template-columns:150px 1fr; gap:16px; padding:16px 0; border-bottom:1px solid var(--trace);}
+  .exp-item:last-child{border-bottom:none;}
+  .exp-date{font-family:var(--font-mono); font-size:12px; color:var(--copper-dim);}
+  .exp-item h4{font-size:15px; margin-bottom:4px;}
+  .exp-item p{color:var(--silk-dim); font-size:13.5px;}
+
+  /* FOOTER / CONTACT */
+  footer{padding:60px 0 40px; text-align:center;}
+  footer h2{font-family:var(--font-display); font-size:30px; margin-bottom:14px;}
+  footer p{color:var(--silk-dim); margin-bottom:26px;}
+  .contact-row{display:flex; justify-content:center; gap:16px; flex-wrap:wrap; margin-bottom:40px;}
+  .foot-note{font-family:var(--font-mono); font-size:11.5px; color:var(--silk-dim); opacity:0.6;}
+
+  @media(prefers-reduced-motion: reduce){
+    .led{transition:none;}
+    .logo .dot{animation:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="logo"><span class="dot"></span> SK.DOTSE // EMBEDDED</div>
+    <nav class="links">
+      <a href="#about"><span class="lang-fr">Profil</span><span class="lang-en">About</span></a>
+      <a href="#projects"><span class="lang-fr">Projets</span><span class="lang-en">Projects</span></a>
+      <a href="#labs"><span class="lang-fr">Labs STM32</span><span class="lang-en">STM32 Labs</span></a>
+      <a href="#contact">Contact</a>
+      <button class="lang-toggle" id="langToggle">EN</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" style="border-top:none;">
+    <div class="eyebrow">
+      <span class="lang-fr">Étudiant ingénieur — Systèmes embarqués &amp; Validation Système</span>
+      <span class="lang-en">Engineering Student — Embedded Systems &amp; System Validation</span>
+    </div>
+    <h1><span class="lang-fr">Sylvanus <span>DOTSE</span></span><span class="lang-en">Sylvanus <span>DOTSE</span></span></h1>
+    <p class="tagline">
+      <span class="lang-fr">Je conçois des bancs de test, j'automatise des séquences de validation et je programme des systèmes embarqués STM32. Basé à Brest, ouvert à l'international.</span>
+      <span class="lang-en">I build test benches, automate validation sequences, and program STM32 embedded systems. Based in Brest, open to international opportunities.</span>
+    </p>
+    <div class="cta-row">
+      <a href="#projects" class="btn btn-primary">
+        <span class="lang-fr">Voir mes projets</span><span class="lang-en">View my projects</span>
+      </a>
+      <a href="https://github.com/sylvanusdotse04-jpg" target="_blank" rel="noopener" class="btn btn-ghost">GitHub ↗</a>
+      <a href="#contact" class="btn btn-ghost"><span class="lang-fr">Me contacter</span><span class="lang-en">Get in touch</span></a>
+    </div>
+    <div class="chaser" id="chaser">
+      <div class="led"></div><div class="led"></div><div class="led"></div><div class="led"></div>
+      <div class="led"></div><div class="led"></div><div class="led"></div><div class="led"></div>
+      <span class="chaser-label">// chenillard_8_led.c — running</span>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="sec-head"><span class="ref">§01</span><h2><span class="lang-fr">Profil</span><span class="lang-en">About</span></h2></div>
+    <div class="about-grid">
+      <div>
+        <p>
+          <span class="lang-fr">Actuellement en cycle ingénieur généraliste à l'ISEN Brest, je me spécialise en électronique, systèmes embarqués, informatique industrielle et traitement du signal. Je recherche un contrat d'alternance en Validation Système dans le secteur automobile.</span>
+          <span class="lang-en">Currently in the generalist engineering program at ISEN Brest, specializing in electronics, embedded systems, industrial computing and signal processing. I'm looking for a work-study contract in System Validation within the automotive sector.</span>
+        </p>
+        <p>
+          <span class="lang-fr">Mon terrain de jeu : les microcontrôleurs STM32, l'instrumentation de mesure (oscilloscope, multimètre, analyseur logique) et l'automatisation de séquences de test en Python. Anglais natif, environnement international.</span>
+          <span class="lang-en">My playground: STM32 microcontrollers, measurement instrumentation (oscilloscope, multimeter, logic analyzer) and Python-based test sequence automation. Native English speaker, comfortable in international environments.</span>
+        </p>
+      </div>
+      <div class="datasheet">
+        <div class="ds-row"><div class="ds-key">MCU</div><div class="ds-val">STM32 (Timers, ADC, PWM)</div></div>
+        <div class="ds-row"><div class="ds-key"><span class="lang-fr">LANGAGES</span><span class="lang-en">LANGUAGES</span></div><div class="ds-val">C · Python · C#</div></div>
+        <div class="ds-row"><div class="ds-key">BUS</div><div class="ds-val">CAN · LIN</div></div>
+        <div class="ds-row"><div class="ds-key"><span class="lang-fr">INSTRUM.</span><span class="lang-en">INSTRUM.</span></div><div class="ds-val">Oscilloscope · Multimètre · Analyseur logique</div></div>
+        <div class="ds-row"><div class="ds-key"><span class="lang-fr">AUTOMATISME</span><span class="lang-en">AUTOMATION</span></div><div class="ds-val">Grafcet · Ladder</div></div>
+        <div class="ds-row"><div class="ds-key"><span class="lang-fr">LANGUES</span><span class="lang-en">SPOKEN</span></div><div class="ds-val"><span class="lang-fr">Anglais (natif) · Français (courant) · Allemand (élémentaire)</span><span class="lang-en">English (native) · French (fluent) · German (elementary)</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="sec-head"><span class="ref">§02</span><h2><span class="lang-fr">Projets principaux</span><span class="lang-en">Featured projects</span></h2></div>
+
+    <div class="proj-card">
+      <div class="proj-top">
+        <h3><span class="lang-fr">Banc de Test Électronique</span><span class="lang-en">Electronic Test Bench</span></h3>
+        <span class="proj-ref">U1</span>
+      </div>
+      <p>
+        <span class="lang-fr">Conception d'un banc de test dédié à la validation fonctionnelle de circuits : automatisation et déploiement de séquences de tests génériques via scripts Python, analyse de signaux à l'oscilloscope, diagnostic et vérification de continuité.</span>
+        <span class="lang-en">Design of a test bench for functional circuit validation: automation and deployment of generic test sequences via Python scripts, oscilloscope signal analysis, diagnostics and continuity checks.</span>
+      </p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">Oscilloscope</span><span class="tag"><span class="lang-fr">Automatisation</span><span class="lang-en">Automation</span></span><span class="tag">ISEN Brest</span></div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-top">
+        <h3><span class="lang-fr">Système Embarqué de Régulation Thermique</span><span class="lang-en">Embedded Thermal Regulation System</span></h3>
+        <span class="proj-ref">U2</span>
+      </div>
+      <p>
+        <span class="lang-fr">Application mêlant électronique de mesure et logiciel embarqué : programmation bas niveau sur cible STM32 (Timers, ADC, PWM), conception de la chaîne d'acquisition analogique et validation du comportement à l'aide d'outils de métrologie.</span>
+        <span class="lang-en">Application combining measurement electronics and embedded software: low-level STM32 programming (Timers, ADC, PWM), analog acquisition chain design, and behavior validation using metrology tools.</span>
+      </p>
+      <div class="tags"><span class="tag">STM32</span><span class="tag">ADC/PWM</span><span class="tag"><span class="lang-fr">Capteurs</span><span class="lang-en">Sensors</span></span><span class="tag">ISEN Brest</span></div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-top">
+        <h3><span class="lang-fr">Séquences de Commande — Automatisme</span><span class="lang-en">Control Sequences — Automation</span></h3>
+        <span class="proj-ref">U3</span>
+      </div>
+      <p>
+        <span class="lang-fr">Modélisation et validation de cycles logiques pour actionneurs : structures Grafcet pour la gestion d'états, simulation numérique des séquences et vérification de la robustesse logique.</span>
+        <span class="lang-en">Modeling and validation of logic cycles for actuators: Grafcet structures for state management, digital sequence simulation, and logic robustness verification.</span>
+      </p>
+      <div class="tags"><span class="tag">Grafcet</span><span class="tag">Ladder</span><span class="tag"><span class="lang-fr">Simulation</span><span class="lang-en">Simulation</span></span><span class="tag">ISEN Brest</span></div>
+    </div>
+  </section>
+
+  <section id="labs">
+    <div class="sec-head"><span class="ref">§03</span><h2><span class="lang-fr">Labs STM32</span><span class="lang-en">STM32 Labs</span></h2></div>
+    <div class="labs-grid" id="labsGrid"></div>
+    <p class="labs-note">
+      <span class="lang-fr">// Travaux pratiques réalisés dans le cadre scolaire sur cible STM32. Code source à venir sur GitHub.</span>
+      <span class="lang-en">// Coursework exercises on STM32 target. Source code coming soon on GitHub.</span>
+    </p>
+  </section>
+
+  <section id="experience">
+    <div class="sec-head"><span class="ref">§04</span><h2><span class="lang-fr">Expérience</span><span class="lang-en">Experience</span></h2></div>
+    <div class="exp-item">
+      <div class="exp-date">2025<span class="lang-fr"> — Juin/Août</span><span class="lang-en"> — Jun/Aug</span></div>
+      <div>
+        <h4><span class="lang-fr">Assistant Conducteur de Travaux</span><span class="lang-en">Site Supervision Assistant</span></h4>
+        <p>Master Builder — Lomé, Togo</p>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">2024<span class="lang-fr"> — Juil/Août</span><span class="lang-en"> — Jul/Aug</span></div>
+      <div>
+        <h4><span class="lang-fr">Responsable d'Équipe / Animateur</span><span class="lang-en">Team Lead / Activity Coordinator</span></h4>
+        <p>Centre Social Les Amarres — Brest</p>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">2024–2025</div>
+      <div>
+        <h4><span class="lang-fr">Équipier Polyvalent</span><span class="lang-en">Team Member</span></h4>
+        <p>KFC — Brest</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2><span class="lang-fr">Discutons</span><span class="lang-en">Let's talk</span></h2>
+    <p>
+      <span class="lang-fr">Ouvert à un contrat d'alternance en Validation Système / Systèmes Embarqués dès septembre 2026.</span>
+      <span class="lang-en">Open to a work-study contract in System Validation / Embedded Systems starting September 2026.</span>
+    </p>
+    <div class="contact-row">
+      <a class="btn btn-primary" href="mailto:komi-sylvanus.dotse@isen-ouest.yncrea.fr">Email ↗</a>
+      <a class="btn btn-ghost" href="https://github.com/sylvanusdotse04-jpg" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+    <p class="foot-note">© 2026 Sylvanus Dotse — ISEN Brest</p>
+  </div>
+</footer>
+
+<script>
+  // Lang toggle
+  const btn = document.getElementById('langToggle');
+  btn.addEventListener('click', () => {
+    const isEn = document.body.classList.toggle('en');
+    btn.textContent = isEn ? 'FR' : 'EN';
+    document.documentElement.lang = isEn ? 'en' : 'fr';
+  });
+
+  // LED chaser animation (hero)
+  const leds = document.querySelectorAll('#chaser .led');
+  let idx = 0;
+  setInterval(() => {
+    leds.forEach(l => l.classList.remove('on'));
+    leds[idx % leds.length].classList.add('on');
+    idx++;
+  }, 220);
+
+  // STM32 labs data
+  const labs = [
+    {ref:'L01', fr:'Clignotement LED', en:'LED blinking'},
+    {ref:'L02', fr:'Chenillard 8 LEDs', en:'8-LED chaser'},
+    {ref:'L03', fr:'Commande LED par bouton poussoir', en:'LED control via push button'},
+    {ref:'L04', fr:'Clignotant marche/arrêt sous interruption', en:'On/off blinker using interrupts'},
+    {ref:'L05', fr:'Affichage d\'une valeur sur afficheur 7 segments', en:'Value display on 7-segment display'},
+    {ref:'L06', fr:'Défilement de mot sur écran', en:'Scrolling text on display'},
+    {ref:'L07', fr:'Génération de signaux PWM', en:'PWM signal generation'},
+    {ref:'L08', fr:'LED à luminosité croissante et décroissante', en:'LED with rising/falling brightness'},
+    {ref:'L09', fr:'Lecture d\'une mélodie', en:'Playing a melody'},
+    {ref:'L10', fr:'Affichage d\'un nombre puis d\'une chaîne sur écran TFT graphique', en:'Number then string display on graphic TFT screen'},
+    {ref:'L11', fr:'Affichage de l\'heure sur écran TFT', en:'Time display on TFT screen'},
+  ];
+  const grid = document.getElementById('labsGrid');
+  grid.innerHTML = labs.map(l => `
+    <div class="lab-card">
+      <span class="lab-ref">${l.ref}</span>
+      <h4><span class="lang-fr">${l.fr}</span><span class="lang-en">${l.en}</span></h4>
+      <span class="mcu">STM32 · <span class="lang-fr">TP École</span><span class="lang-en">Coursework</span></span>
+    </div>
+  `).join('');
+</script>
+
+</body>
+</html>
