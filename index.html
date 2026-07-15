@@ -254,7 +254,7 @@
           <span class="lang-de">Derzeit im allgemeinen Ingenieurstudium an der ISEN Brest, spezialisiert auf Elektronik, eingebettete Systeme, Informationstechnik und Signalverarbeitung. Ich suche eine Werkstudentenstelle im Bereich Systemvalidierung in der Automobilbranche.</span>
         </p>
         <p>
-          <span class="lang-fr">Mon terrain de jeu : les microcontrôleurs STM32, l'instrumentation de mesure (oscilloscope, multimètre, analyseur logique) et l'automatisation de séquences de test en Python. Anglais natif, environnement international.</span>
+          <span class="lang-fr">Mon terrain de jeu : les microcontrôleurs STM32, l'instrumentation de mesure (oscilloscope, multimètre, analyser logique) et l'automatisation de séquences de test en Python. Anglais natif, environnement international.</span>
           <span class="lang-en">My playground: STM32 microcontrollers, measurement instrumentation (oscilloscope, multimeter, logic analyzer) and Python-based test sequence automation. Native English speaker, comfortable in international environments.</span>
           <span class="lang-de">Mein Fachbereich: STM32-Mikrocontroller, Messtechnik (Oszilloskop, Multimeter, Logikanalysator) und Python-basierte Testautomatisierung. Englischer Muttersprachler, im internationalen Umfeld zu Hause.</span>
         </p>
@@ -396,7 +396,7 @@
           <span class="lang-en">Registers &amp; Software APIs</span>
           <span class="lang-de">Register &amp; Software-APIs</span>
         </div>
-        <div class="modal-section-content" id="modalCode" style="font-family:var(--font-mono); background:rgba(0,0,0,0.3); padding:10px; border-radius:var(--radius); font-size:12.5px; white-space: pre-wrap;">HAL_GPIO_WritePin</div>
+        <pre><code class="modal-section-content" id="modalCode" style="font-family:var(--font-mono); background:rgba(0,0,0,0.3); padding:15px; border-radius:var(--radius); font-size:12.5px; white-space: pre-wrap; display:block; overflow-x:auto; color:#a9beb2; border:1px solid var(--trace);"></code></pre>
       </div>
     </div>
   </div>
@@ -444,273 +444,524 @@
   const labs = [
     {
       ref: 'L01',
-      title: { fr: 'Clignotement LED', en: 'LED Blinking', de: 'LED Blinken' },
+      title: { fr: 'Somme des 20 premiers nombres', en: 'Arithmetic Sum of 20 Numbers', de: 'Arithmetische Summe von 20 Zahlen' },
       hardware: {
-        fr: 'GPIO Port A / Pin 5 (LED Utilisateur), RCC (Reset and Clock Control)',
-        en: 'GPIO Port A / Pin 5 (User LED), RCC (Reset and Clock Control)',
-        de: 'GPIO Port A / Pin 5 (Benutzer-LED), RCC (Reset and Clock Control)'
+        fr: 'ALU du CPU Cortex-M, Registres de travail, Mémoire SRAM',
+        en: 'Cortex-M CPU ALU, Working Registers, SRAM Memory',
+        de: 'Cortex-M CPU ALU, Arbeitsregister, SRAM-Speicher'
       },
       desc: {
-        fr: 'Mise en œuvre élémentaire d\'une broche numérique configurée en mode sortie standard (Push-Pull). Ce travail valide la mise en place de la chaîne d\'outils STM32CubeIDE ainsi que l\'oscillateur interne.',
-        en: 'Basic implementation of a digital pin configured as a standard push-pull output. This lab validates the STM32CubeIDE toolchain setup and internal RC clock source configuration.',
-        de: 'Grundlegende Implementierung eines digitalen Pins im Standard-Push-Pull-Modus. Diese Übung validiert das Setup der STM32CubeIDE-Toolchain und des internen Quarzes.'
+        fr: 'Calcul itératif en boucle de la somme arithmétique de 2 à 20 avec initialisation à 1. Ce travail valide le comportement arithmétique basique de la cible.',
+        en: 'Iterative loop calculating the arithmetic sum from 2 to 20 with variable initialization to 1. Validates the basic core computation and register manipulation.',
+        de: 'Iterative Schleifenberechnung der arithmetischen Summe von 2 bis 20 mit Initialisierung auf 1. Validiert grundlegende CPU-Rechenoperationen.'
       },
-      code: 'RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;\nGPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;\nHAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);\nHAL_Delay(500);'
+      code: `uint8_t i;
+uint8_t somme = 1;
+
+for(i = 2; i <= 20; i++) {
+    somme = somme + i;
+}
+while (1) {}`
     },
     {
       ref: 'L02',
-      title: { fr: 'Chenillard 8 LEDs', en: '8-LED Chaser', de: '8-LED Lauflicht' },
+      title: { fr: 'Clignotement d\'une LED', en: 'LED Blinking', de: 'LED Blinken' },
       hardware: {
-        fr: 'Port GPIO B (Pins 0 à 7), bus AHB1, Alimentation 3.3V',
-        en: 'GPIO Port B (Pins 0 to 7), AHB1 bus, 3.3V Power Line',
-        de: 'GPIO Port B (Pins 0 bis 7), AHB1-Bus, 3.3V Stromversorgung'
+        fr: 'GPIO Port B (PB0), Bus AHB (RCC_AHBENR), Mode Push-Pull',
+        en: 'GPIO Port B (PB0), AHB Bus (RCC_AHBENR), Push-Pull Mode',
+        de: 'GPIO Port B (PB0), AHB-Bus (RCC_AHBENR), Push-Pull-Modus'
       },
       desc: {
-        fr: 'Développement d\'une séquence de translation temporelle lumineuse sur 8 broches. Écriture directe par masquage de bits sur le registre de données afin d\'obtenir une synchronisation d\'affichage parfaite sans dérive.',
-        en: 'Development of an 8-channel sequential light shift pattern. Implemented through direct bitmask operations on the data registers for microsecond-precise toggling.',
-        de: 'Entwicklung eines 8-Kanal-Lauflichtmusters. Direktzugriff über Bitmasken auf die Datenregister für mikrosekundengenaue Umschaltzyklen.'
+        fr: 'Configuration bas niveau du port de sortie PB0 par manipulation directe de registres et clignotement asynchrone avec HAL_Delay de 499 ms.',
+        en: 'Low-level configuration of output port PB0 by direct register editing and asynchronous toggling with a 499 ms HAL_Delay.',
+        de: 'Low-Level-Konfiguration des PB0-Ausgangs durch direktes Schreiben in die Register. Asynchrones Blinken mit 499 ms HAL_Delay.'
       },
-      code: 'GPIOB->ODR = (1 << shift_index);\n// Alternative HAL:\nHAL_GPIO_WritePin(GPIOB, LED_Pins[i], GPIO_PIN_SET);'
+      code: `void init_ports_LED(void){
+    RCC->AHBENR |= (1 << 1);    // Activer l'horloge GPIOB
+    GPIOB->MODER &= ~(1 << 1);  // Configurer PB0 en sortie
+    GPIOB->MODER |=  (1 << 0);
+    GPIOB->OTYPER &= ~(1 << 0); // Mode Push-Pull
+}
+
+void allume_LED(void)  { GPIOB->ODR |=  (1 << 0); }
+void eteint_LED(void)  { GPIOB->ODR &= ~(1 << 0); }
+
+int main(void){
+    HAL_Init();
+    SystemClock_Config();
+    init_ports_LED();
+
+    while (1) {
+        allume_LED();
+        HAL_Delay(499);
+        eteint_LED();
+        HAL_Delay(499);
+    }
+}`
     },
     {
       ref: 'L03',
-      title: { fr: 'Commande LED par bouton poussoir', en: 'LED Control via Push Button', de: 'LED-Steuerung über Taster' },
+      title: { fr: 'Chenillard 8 LEDs', en: '8-LED Chaser', de: '8-LED Lauflicht' },
       hardware: {
-        fr: 'GPIO Port C Pin 13 (Bouton Bleu), Résistance Pull-Up interne, GPIO Port A Pin 5',
-        en: 'GPIO Port C Pin 13 (User Button), Internal Pull-Up resistor, GPIO Port A Pin 5',
-        de: 'GPIO Port C Pin 13 (Blauer Taster), Interner Pull-Up Widerstand, GPIO Port A Pin 5'
+        fr: 'GPIO Port B (PB0, PB1, PB10..PB15), Registres MODER, OTYPER et ODR',
+        en: 'GPIO Port B (PB0, PB1, PB10..PB15), MODER, OTYPER and ODR Registers',
+        de: 'GPIO Port B (PB0, PB1, PB10..PB15), MODER, OTYPER und ODR Register'
       },
       desc: {
-        fr: 'Lecture active (Polling) de l\'état d\'un commutateur matériel avec traitement anti-rebond intégré par logiciel (debounce temporisé) pour commuter l\'allumage d\'une LED.',
-        en: 'Polling-based reading of a mechanical switch state. Includes software-implemented debounce delay to prevent signal noise from generating false triggers.',
-        de: 'Polling-basierte Erfassung eines mechanischen Schalterzustands. Beinhaltet eine Software-Entprellung (Debounce Delay).'
+        fr: 'Balayage aller-retour dynamique sur 8 LEDs physiques avec une rampe d\'accélération programmable de l\'affichage.',
+        en: 'Dynamic back-and-forth scan on 8 physical LEDs featuring a linear acceleration pattern over time.',
+        de: 'Dynamisches Hin- und Her-Lauflicht über 8 physikalische LEDs mit einer programmierbaren Beschleunigungsrampe.'
       },
-      code: 'if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) == GPIO_PIN_RESET) {\n  HAL_Delay(20); // Anti-rebond\n  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);\n}'
+      code: `void init_ports_LED(void){
+    RCC->AHBENR |= (1 << 1); // Horloge GPIOB
+    // Nettoyage et configuration des broches 0, 1, 10, 11, 12, 13, 14, 15
+    GPIOB->MODER &= ~((2<<0) | (2<<2) | (2<<20) | (2<<22) | (2<<24) | (2<<26) | (2<<28) | (2<<30));
+    GPIOB->MODER |= ((1<<0) | (1<<2) | (1<<20) | (1<<22) | (1<<24) | (1<<26) | (1<<28) | (1<<30));
+    GPIOB->OTYPER &= ~0xFC03; // Mode Push-pull
+}
+
+void allume_LED(uint8_t i){
+    GPIOB->ODR |= (1 << (i == 0 ? 0 : (i == 1 ? 1 : (i + 8))));
+}
+
+void eteint_LED(uint8_t i){
+    GPIOB->ODR &= ~(1 << (i == 0 ? 0 : (i == 1 ? 1 : (i + 8))));
+}
+
+int main(void){
+    HAL_Init();
+    SystemClock_Config();
+    init_ports_LED();
+    uint32_t delai = 100;
+
+    while (1) {
+        for (uint8_t i = 0; i <= 7; i++) {
+            allume_LED(i);
+            HAL_Delay(delai);
+            eteint_LED(i);
+            HAL_Delay(delai);
+        }
+        for (int8_t i = 6; i >= 1; i--) {
+            allume_LED(i);
+            HAL_Delay(delai);
+            eteint_LED(i);
+            HAL_Delay(delai);
+        }
+        delai = (delai > 10) ? delai - 10 : 100;
+    }
+}`
     },
     {
       ref: 'L04',
-      title: { fr: 'Clignotant par interruption', en: 'Interrupt-Driven Blinker', de: 'Interrupt-gesteuertes Blinken' },
+      title: { fr: 'LED pilotée par Bouton Poussoir', en: 'LED control via Button', de: 'LED-Steuerung über Taster' },
       hardware: {
-        fr: 'Ligne EXTI15_10, Contrôleur NVIC (Priorités matérielles), GPIO C13',
-        en: 'EXTI15_10 Line, NVIC controller (Hardware Priority), GPIO C13',
-        de: 'EXTI15_10-Leitung, NVIC-Controller (Hardware-Priorität), GPIO C13'
+        fr: 'GPIO Port A Pin 11 (IDR), Port B Pin 0 (ODR), Registre IDR',
+        en: 'GPIO Port A Pin 11 (IDR), Port B Pin 0 (ODR), IDR Register',
+        de: 'GPIO Port A Pin 11 (IDR), Port B Pin 0 (ODR), IDR Register'
       },
       desc: {
-        fr: 'Gestion événementielle d\'un signal d\'entrée via les interruptions matérielles. Configuration du déclenchement sur front descendant de l\'EXTI sans bloquer le processeur principal.',
-        en: 'Event-driven input signal processing. Configuration of the EXTI handler on the falling edge of PC13, allowing the CPU to execute sleep instructions between button presses.',
-        de: 'Ereignisgesteuerte Signalverarbeitung. Konfiguration des EXTI-Handlers bei fallender Flanke am Pin PC13 zur Entlastung der CPU.'
+        fr: 'Acquisition numérique par scrutation d\'état (polling) sur l\'entrée PA11 pour piloter dynamiquement la LED PB0.',
+        en: 'Polling-based hardware reading on PA11 input channel to drive the PB0 LED indicator in real-time.',
+        de: 'Polling-basierte Zustandserfassung am Eingang PA11 zur direkten Echtzeit-Steuerung der LED PB0.'
       },
-      code: 'HAL_NVIC_SetPriority(EXTI15_10_IRQn, 2, 0);\nHAL_NVIC_EnableIRQ(EXTI15_10_IRQn);\n\nvoid HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {\n  if(GPIO_Pin == GPIO_PIN_13) { toggle_led(); }\n}'
+      code: `void init_ports_LED(void){
+    RCC->AHBENR |= (1 << 1);
+    GPIOB->MODER &= ~(1 << 1); // Reset
+    GPIOB->MODER |= (1 << 0);  // PB0 en sortie
+}
+
+void init_ports_BP(void){
+    RCC->AHBENR |= (1 << 0);
+    GPIOA->MODER &= ~((1 << 22) | (1 << 23)); // PA11 en entrée
+    GPIOA->PUPDR &= ~((1 << 22) | (1 << 23)); // Sans pull-up/pull-down
+}
+
+int main(void){
+    HAL_Init();
+    SystemClock_Config();
+    init_ports_LED();
+    init_ports_BP();
+
+    while (1) {
+        if ((GPIOA->IDR & (1 << 11)) == 0)
+            allume_LED();
+        else
+            eteint_LED();
+    }
+}`
     },
     {
       ref: 'L05',
-      title: { fr: 'Afficheur 7 segments', en: '7-Segment Display Controller', de: '7-Segment-Anzeige' },
+      title: { fr: 'Clignotant Marche/Arrêt sous Interruption', en: 'Interrupt-Driven Blinker', de: 'Interrupt-gesteuertes Blinken' },
       hardware: {
-        fr: '7 sorties GPIO (A à G), Transistors de multiplexage, Limiteurs de courant',
-        en: '7 GPIO outputs (A to G), Multiplexing transistors, Current limiting resistors',
-        de: '7 GPIO-Ausgänge (A bis G), Multiplex-Transistoren, Vorwiderstände'
+        fr: 'EXTI11, EXTI12, Contrôleur NVIC, Broches PA11 et PA12',
+        en: 'EXTI11, EXTI12, NVIC Controller, Pins PA11 and PA12',
+        de: 'EXTI11, EXTI12, NVIC-Controller, Pins PA11 und PA12'
       },
       desc: {
-        fr: 'Pilotage d\'afficheurs à cathode commune à l\'aide d\'un tableau de transcodage binaire. Implémentation du multiplexage temporel pour économiser les broches d\'E/S du STM32.',
-        en: 'Driving common-cathode 7-segment displays using a custom binary decoding lookup table. Implementation of high-frequency multiplexing to reduce I/O pin consumption.',
-        de: 'Ansteuerung einer 7-Segment-Anzeige mit gemeinsamer Kathode über eine binäre Dekodierungstabelle und Hochfrequenz-Multiplexing.'
+        fr: 'Utilisation des interruptions EXTI pour capturer de manière asynchrone les états Start (PA11) et Stop (PA12).',
+        en: 'Leveraging hardware external interrupts (EXTI) to toggle a volatile control state asynchronously via PA11 and PA12.',
+        de: 'Nutzung externer Hardware-Interrupts (EXTI) zur asynchronen Steuerung eines flüchtigen Flags über PA11 und PA12.'
       },
-      code: 'const uint8_t segment_map[10] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, ...};\nvoid display_digit(uint8_t val) {\n  GPIOB->ODR = segment_map[val];\n}'
+      code: `volatile uint8_t clignotant = 0;
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
+    if (GPIO_Pin == GPIO_PIN_11) clignotant = 1;
+    if (GPIO_Pin == GPIO_PIN_12) clignotant = 0;
+}
+
+int main(void){
+    HAL_Init();
+    SystemClock_Config();
+    MX_GPIO_Init(); // Configure les EXTI et la LED PB0
+
+    while (1) {
+        if (clignotant == 1) {
+            allume_LED();
+            HAL_Delay(499);
+        }
+        eteint_LED();
+        HAL_Delay(500);
+    }
+}`
     },
     {
       ref: 'L06',
-      title: { fr: 'Défilement de mot sur écran', en: 'Screen Text Scroll', de: 'Text-Scrollen auf Display' },
+      title: { fr: 'Afficheur 7 Segments (MAX7219)', en: '7-Segment Display (MAX7219)', de: '7-Segment-Anzeige (MAX7219)' },
       hardware: {
-        fr: 'Écran OLED/LCD, Contrôleur I2C (Pins SDA/SCL), DMA optionnel',
-        en: 'OLED/LCD Screen, I2C Bus controller (SDA/SCL lines), Optional DMA',
-        de: 'OLED/LCD-Display, I2C-Bus (SDA/SCL Leitungen), Optionaler DMA'
+        fr: 'Contrôleur SPI1, Driver MAX7219, Protocole de communication série',
+        en: 'SPI1 Controller, MAX7219 Driver, Serial communication protocol',
+        de: 'SPI1-Controller, MAX7219 Treiber, Serielles Kommunikationsprotokoll'
       },
       desc: {
-        fr: 'Configuration de l\'interface série synchrone I2C pour communiquer avec un écran graphique. Création d\'un tampon de rafraîchissement local et décalage circulaire des pointeurs mémoire.',
-        en: 'I2C synchronous communication protocol setup. Instantiation of a frame-buffer in SRAM and cyclic shifting of memory pointers to achieve seamless horizontal text scrolling.',
-        de: 'Einrichtung des synchronen I2C-Protokolls. Erstellung eines Frame-Buffers im SRAM und zyklisches Verschieben von Pointern.'
+        fr: 'Multiplexage et écriture de registres sur le bus SPI pour l\'affichage d\'octets décimaux éclatés en dizaines/unités.',
+        en: 'SPI-based register writing to configure and send display data to the MAX7219 ASIC, multiplexing tens and units.',
+        de: 'SPI-basierte Registersteuerung zur Übertragung von Anzeigedaten an den MAX7219, aufgeteilt in Zehner und Einer.'
       },
-      code: 'HAL_I2C_Mem_Write(&hi2c1, OLED_ADDR, CTRL_REG, 1, buffer, BUF_SIZE, 100);\n// Buffer shift operation:\nmemmove(local_fb, local_fb + 1, FB_SIZE - 1);'
+      code: `volatile uint16_t compteur = 0;
+
+void affiche(uint8_t nombre){
+    uint8_t uni = nombre % 10;
+    uint8_t diz = nombre / 10;
+
+    MAX7219_DisplayChar(2, uni); // Deuxième digit (unités)
+    MAX7219_DisplayChar(1, diz); // Premier digit (dizaines)
+}`
     },
     {
       ref: 'L07',
-      title: { fr: 'Génération de signaux PWM', en: 'PWM Signal Generation', de: 'PWM-Signalerzeugung' },
+      title: { fr: 'Compteur Modulo 100 avec Timer', en: 'Modulo 100 Timer Counter', de: 'Modulo-100 Timer-Zähler' },
       hardware: {
-        fr: 'Timer matériel (TIM2/TIM3), Registres Auto-Reload (ARR) et Capture/Compare (CCR)',
-        en: 'Hardware Timer (TIM2/TIM3), Auto-Reload (ARR) & Capture/Compare (CCR) registers',
-        de: 'Hardware-Timer (TIM2/TIM3), Auto-Reload- (ARR) & Capture/Compare- (CCR) Register'
+        fr: 'Timer Matériel TIM2, Interruption Périodique (TIM2_IRQn), Bus SPI',
+        en: 'Hardware Timer TIM2, Periodic ISR (TIM2_IRQn), SPI Bus',
+        de: 'Hardware-Timer TIM2, Periodischer Interrupt (TIM2_IRQn), SPI-Bus'
       },
       desc: {
-        fr: 'Configuration d\'un canal Timer en mode modulation de largeur d\'impulsion (PWM). Validation métrologique de la linéarité du rapport cyclique et calcul des prédiviseurs pour une fréquence stable.',
-        en: 'Configuration of a timer channel in PWM (Pulse Width Modulation) generation mode. Hardware verification of duty cycle linearity and prescaler calculations for a target frequency.',
-        de: 'Konfiguration eines Timer-Kanals im PWM-Modus (Pulsweitenmodulation). Messtechnische Validierung der Frequenzstabilität am Oszilloskop.'
+        fr: 'Régulation temporelle de l\'incrémentation par un timer configuré pour déborder toutes les 500 ms.',
+        en: 'Synchronized counter driven by an internal 500 ms periodic timer update interrupt, featuring start/stop control.',
+        de: 'Präzise Taktung der Zähler-Inkrementierung über einen internen Timer-Interrupt alle 500 ms mit Start-/Stopp-Überwachung.'
       },
-      code: 'TIM2->PSC = 16 - 1; // Prescaler\nTIM2->ARR = 1000 - 1; // Période\nTIM2->CCR1 = 250; // Duty Cycle 25%\nHAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);'
+      code: `volatile uint16_t compteur = 0;
+volatile uint8_t marche = 0;
+volatile uint8_t tempo_500ms_ok = 0;
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
+    if (GPIO_Pin == GPIO_PIN_11) marche = 1;
+    if (GPIO_Pin == GPIO_PIN_12) marche = 0;
+}
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim){
+    if (htim->Instance == TIM2) {
+        tempo_500ms_ok = 1;
+    }
+}
+
+int main(void){
+    HAL_Init();
+    SystemClock_Config();
+    MX_GPIO_Init();
+    MX_SPI1_Init();
+    MX_TIM2_Init(); // Configuré pour 500ms d'interruption
+
+    MAX7219_Init();
+    HAL_TIM_Base_Start_IT(&htim2);
+
+    while (1) {
+        affiche(compteur);
+        while (!tempo_500ms_ok);
+        tempo_500ms_ok = 0;
+
+        if (marche) compteur++;
+        if (compteur > 99) compteur = 0;
+    }
+}`
     },
     {
       ref: 'L08',
-      title: { fr: 'LED à luminosité croissante/décroissante', en: 'Breathing LED Control', de: 'Fading-LED (Atmen)' },
+      title: { fr: 'Générateur de signaux PWM', en: 'PWM Signal Generation', de: 'PWM Signalgenerierung' },
       hardware: {
-        fr: 'Timer TIM2 en mode PWM, Interruption périodique SysTick ou Timer dédié',
-        en: 'Timer TIM2 in PWM mode, Periodic interrupt via SysTick or helper timer',
-        de: 'Timer TIM2 im PWM-Modus, Periodischer Interrupt über SysTick'
+        fr: 'TIM3 Canal 1, Registres ARR, PSC et CCR1',
+        en: 'TIM3 Channel 1, ARR, PSC and CCR1 Registers',
+        de: 'TIM3 Kanal 1, ARR, PSC und CCR1 Register'
       },
       desc: {
-        fr: 'Modulation continue de la brillance d\'une LED par variation incrémentale du rapport cyclique. Algorithme basé sur une table de correspondance sinusoïdale pour une transition visuelle fluide.',
-        en: 'Continuous LED brightness modulation. Employs a lookup table with sinusiodal coefficients mapped inside a timer callback to emulate a soft "breathing" visual effect.',
-        de: 'Kontinuierliche Helligkeitsregelung über Sinuskoeffizienten. Anpassung des Duty Cycle in einem Timer-Callback für weiche Lichtübergänge.'
+        fr: 'Configuration de la modulation de largeur d\'impulsion en écrivant directement dans les registres du périphérique.',
+        en: 'Configuring PWM parameters directly in register spaces to achieve fixed frequency and specific duty cycle.',
+        de: 'Konfiguration des Pulsweitenmodulations-Signals durch direkten Registerzugriff (Frequenz- und Tastverhältnis-Steuerung).'
       },
-      code: 'uint16_t pwm_val = 0; int16_t step = 5;\nvoid HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {\n  pwm_val += step;\n  if(pwm_val >= 1000 || pwm_val <= 0) step = -step;\n  __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, pwm_val);\n}'
+      code: `// Démarrage de la génération PWM sur le canal 1 du TIM3
+HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
+
+TIM3->ARR = 160 - 1;   // Fréquence / Période
+TIM3->PSC = 5 - 1;     // Prescaler de l'horloge
+TIM3->CCR1 = 107;      // Rapport cyclique (~67% d'impulsion haute)
+
+while (1) {}`
     },
     {
       ref: 'L09',
-      title: { fr: 'Lecture d\'une mélodie', en: 'Melody Player / Piezo Driver', de: 'Melodiegenerator (Piezo)' },
+      title: { fr: 'Commande d\'un Servomoteur', en: 'Servo Motor Control', de: 'Servomotor-Steuerung' },
       hardware: {
-        fr: 'Buzzer piézoélectrique, Timer configuré en sortie de fréquence variable (Fréquence des notes musicales)',
-        en: 'Piezoelectric buzzer element, Timer output configured for variable frequency synthesis',
-        de: 'Piezoelektrischer Summer, Timer-Ausgang zur Frequenzsynthese'
+        fr: 'TIM3 Canal 2 (PWM), TIM2 (Base de temps), Servomoteur analogique',
+        en: 'TIM3 Channel 2 (PWM), TIM2 (Timebase), Analog Servo Motor',
+        de: 'TIM3 Kanal 2 (PWM), TIM2 (Zeitbasis), Analoger Servomotor'
       },
       desc: {
-        fr: 'Génération de fréquences variables d\'onde carrée correspondant aux notes de musique. Lecture d\'une partition structurée sous forme de tableau mémoire (Note, Durée).',
-        en: 'Generation of square wave frequencies matching standard musical note pitches. Sequential execution of pitch data stored inside an array map paired with a duration scheduler.',
-        de: 'Erzeugung von Rechteckwellen im Frequenzbereich von Tonleitern. Sequentielle Ausführung einer Notentabelle (Tonhöhe, Dauer) über PWM.'
+        fr: 'Balayage d\'angle de 0 à 90 degrés à l\'aide d\'une conversion mathématique vers le registre PWM.',
+        en: 'Hardware angles translation from 0 to 90 degrees by converting angular coordinates into duty cycle values.',
+        de: 'Winkelsteuerung von 0 bis 90 Grad durch Umrechnung der Winkelwerte in entsprechende PWM-Tastverhältnisse.'
       },
-      code: 'void play_note(uint32_t frequency, uint32_t duration) {\n  uint32_t arr_val = SystemCoreClock / frequency - 1;\n  __HAL_TIM_SET_AUTORELOAD(&htim3, arr_val);\n  __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, arr_val/2);\n  HAL_Delay(duration);\n}'
+      code: `volatile uint8_t angle = 0;
+volatile uint8_t sens = 1;
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim){
+    if (htim->Instance == TIM2) { // Cadencement de la vitesse d'oscillation
+        if (sens == 1) {
+            if (angle < 90) angle++;
+            else sens = 0;
+        } else {
+            if (angle > 0) angle--;
+            else sens = 1;
+        }
+        affiche(angle);
+        // Formule de conversion d'angle vers le registre de comparaison du servo
+        TIM3->CCR2 = 3200 + (angle * 3200) / 90;
+    }
+}
+
+int main(void){
+    HAL_Init();
+    SystemClock_Config();
+    MX_GPIO_Init();
+    MX_SPI1_Init();
+    MX_TIM2_Init();
+    MX_TIM3_Init();
+
+    MAX7219_Init();
+    HAL_TIM_Base_Start_IT(&htim2);
+    HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
+
+    while (1) {}
+}`
     },
     {
       ref: 'L10',
-      title: { fr: 'Affichage sur écran TFT graphique', en: 'TFT Graphic Driver & DMA', de: 'TFT-Grafikanzeige & DMA' },
+      title: { fr: 'Musique avec PWM (Jouer la gamme)', en: 'PWM Melodic Player (Scale)', de: 'PWM-Melodienspieler (Tonleiter)' },
       hardware: {
-        fr: 'Écran TFT graphique ILI9341, Liaison SPI matérielle, Contrôleur DMA (Direct Memory Access)',
-        en: 'ILI9341 TFT screen, Hardware SPI interface, Direct Memory Access (DMA) channel',
-        de: 'ILI9341 TFT-Display, Hardware-SPI, DMA-Kanal (Direct Memory Access)'
+        fr: 'TIM3 Canal 1, Buzzer Piezoélectrique, Registres ARR et CCR1',
+        en: 'TIM3 Channel 1, Piezoelectric Buzzer, ARR and CCR1 Registers',
+        de: 'TIM3 Kanal 1, Piezoelektrischer Summer, ARR- und CCR1-Register'
       },
       desc: {
-        fr: 'Mise en place d\'un pilote d\'affichage graphique haute résolution. Utilisation du canal DMA SPI afin de transmettre les blocs de pixels sans monopoliser les cycles de calcul de l\'unité centrale.',
-        en: 'Implementation of a high-resolution graphical frame buffer interface. Leveraging the SPI DMA channel to pipe frame buffers without blocking CPU compute capacity.',
-        de: 'Implementierung eines hochauflösenden Grafik-Treibers. Verwendung von SPI-DMA zur direkten Speicherübertragung ohne Blockierung der CPU.'
+        fr: 'Variation dynamique du registre ARR en fonction des fréquences de la gamme tout en maintenant un rapport cyclique stable.',
+        en: 'Modifying the ARR register on the fly to yield notes frequencies, with a fixed 50% duty cycle.',
+        de: 'Dynamische Anpassung des ARR-Registers basierend auf Frequenztönen bei einem konstanten Tastverhältnis von 50 %.'
       },
-      code: 'HAL_SPI_Transmit_DMA(&hspi1, frame_buffer, FRAME_SIZE);\n// Configuration des registres DMA:\nDMA1_Channel3->CPAR = (uint32_t)&(SPI1->DR);\nDMA1_Channel3->CMAR = (uint32_t)frame_buffer;'
+      code: `const uint16_t tab_freq_note[7] = {524, 587, 662, 701, 787, 878, 1004};
+const uint16_t tab_music[14] = {4, 4, 4, 5, 6, 6, 5, 5, 4, 6, 5, 5, 4, 255};
+
+void SET_PWM_Freq(uint32_t freq){
+    if (freq == 0) { 
+        TIM3->CCR1 = 0; // Pas de son si fréquence nulle
+        return; 
+    }
+    uint32_t ARR = (16000000 / freq) - 1; // Calcul automatique (F_sys = 16MHz)
+    TIM3->ARR = ARR;
+    TIM3->CCR1 = ARR / 2; // Rapport cyclique fixe de 50%
+}
+
+int main(void){
+    HAL_Init();
+    SystemClock_Config();
+    MX_GPIO_Init();
+    MX_TIM3_Init();
+    MX_SPI1_Init();
+
+    MAX7219_Init();
+    HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
+
+    while (1) {
+        for (int i = 0; tab_music[i] != 255; i++) {
+            SET_PWM_Freq(tab_freq_note[tab_music[i]]);
+            HAL_Delay(499);
+            SET_PWM_Freq(0); // Coupure brève
+            affiche(tab_music[i]);
+            HAL_Delay(25);
+        }
+    }
+}`
     },
     {
       ref: 'L11',
-      title: { fr: 'Affichage de l\'heure (Horloge RTC)', en: 'Real-Time Clock (RTC) Display', de: 'Echtzeituhr-Anzeige (RTC)' },
+      title: { fr: 'Horloge et Communication PC/TFT', en: 'RTC, TFT Screen & UART', de: 'Echtzeit-Uhr, TFT & UART' },
       hardware: {
-        fr: 'Périphérique RTC, Quartz externe de précision LSE à 32.768 kHz, Écran TFT',
-        en: 'Internal RTC core, External LSE precision crystal (32.768 kHz), TFT Display',
-        de: 'Interne RTC-Einheit, Externer LSE-Präzisionsquarz (32.768 kHz), TFT-Display'
+        fr: 'Contrôleur RTC (Real-Time Clock), Écran graphique TFT (SPI/Parallel), USART2 (Terminal PC)',
+        en: 'RTC Controller (Real-Time Clock), TFT Graphic Screen (SPI/Parallel), USART2 (PC Terminal)',
+        de: 'RTC-Controller (Echtzeit-Uhr), TFT-Grafikbildschirm (SPI/Parallel), USART2 (PC-Terminal)'
       },
       desc: {
-        fr: 'Configuration de l\'horloge temps réel interne alimentée par pile de secours. Récupération des structures de temps et formatage en texte dynamique mis à jour à fréquence stable.',
-        en: 'Configuration of the ultra-low-power backup domain and real-time clock. Reading structures of hours, minutes, and seconds, followed by partial TFT display updates to avoid screen flickering.',
-        de: 'Konfiguration der hardwarebasierten Echtzeituhr (RTC) mit Batteriepufferung. Auslesen von Uhrzeitstrukturen und flimmerfreie Anzeigeaktualisierung.'
+        fr: 'Initialisation du module d\'horloge temps réel (RTC) de la puce, mise en forme et affichage simultané sur écran TFT local et sur console via transmission asynchrone USART.',
+        en: 'Initialization of the internal RTC block to keep time. Formats and prints structured date/time information to a TFT display and simultaneously streams it to a virtual PC terminal over UART.',
+        de: 'Initialisierung des internen RTC-Moduls zur Zeitmessung. Strukturierte Zeitausgabe auf einem TFT-Display und paralleles Streaming über USART an ein PC-Terminal.'
       },
-      code: 'RTC_TimeTypeDef sTime;\nHAL_RTC_GetTime(&hrtc, &sTime, RTC_FORMAT_BIN);\nsprintf(time_str, "%02d:%02d:%02d", sTime.Hours, sTime.Minutes, sTime.Seconds);\nTFT_DrawString(10, 10, time_str);'
-    },
+      code: `RTC_TimeTypeDef sTime = {0};
+RTC_DateTypeDef sDate = {0};
+char str_time[20];
 
-    // Main featured projects data
-    {
-      ref: 'U1',
-      title: { fr: 'Banc de Test Électronique', en: 'Electronic Test Bench', de: 'Elektronischer Prüfstand' },
-      hardware: {
-        fr: 'Scripts d\'automatisation Python (PySerial, PyVISA), Oscilloscope numérique Rigol, Relais d\'isolement',
-        en: 'Python scripting (PySerial, PyVISA), Rigol Digital Oscilloscope, Isolated Relay Matrices',
-        de: 'Python-Skripte (PySerial, PyVISA), Rigol Digitalspeicheroszilloskop, Isolationsrelais'
-      },
-      desc: {
-        fr: 'Développement d\'une architecture logicielle générique sous Python pour piloter des appareils de mesure SCPI. Automatisation de scénarios de validation pour cartes de puissance : génération de profils, acquisition automatique des signaux d\'oscilloscope, détection de courts-circuits et génération de rapports PDF.',
-        en: 'Development of an automation software architecture in Python communicating via SCPI. Automated functional testing for power boards: signal profiles injection, automated waveform captures, continuity and short-circuit protection testing, and PDF reporting.',
-        de: 'Entwicklung einer Softwarearchitektur in Python zur Steuerung von Messgeräten über SCPI. Automatisierung von Funktionstests für Leistungskarten: automatische Signal- und Wellenformerfassung sowie PDF-Berichtserstellung.'
-      },
-      code: 'import pyvisa\nrm = pyvisa.ResourceManager()\nscope = rm.open_resource("USB0::0x1AB1::0x0588::...")\nscope.write(":MEASure:ITEM VPP,CHANnel1")\nvpp = scope.query(":MEASure:ITEM? VPP,CHANnel1")'
-    },
-    {
-      ref: 'U2',
-      title: { fr: 'Système Embarqué de Régulation Thermique', en: 'Embedded Thermal Regulation System', de: 'Eingebettetes thermisches Regelsystem' },
-      hardware: {
-        fr: 'STM32, Capteur PT100 (pont de Wheatstone & ampli d\'instrumentation), driver MOSFET, PWM, ADC 12 bits',
-        en: 'STM32 MCU, PT100 Sensor (Wheatstone Bridge & Instrumentation Amp), MOSFET driver, PWM, 12-bit ADC',
-        de: 'STM32-MCU, PT100-Sensor (Wheatstone-Brücke & Instrumentenverstärker), MOSFET-Treiber, PWM, 12-Bit-ADC'
-      },
-      desc: {
-        fr: 'Conception complète d\'une régulation en boucle fermée. La chaîne d\'acquisition analogique traite les signaux d\'une thermistance de précision, numérisés via l\'ADC interne. L\'asservissement PID logiciel ajuste le rapport cyclique de la PWM alimentant la résistance de chauffe via un étage de puissance à MOSFET.',
-        en: 'Full closed-loop thermal regulation design. The analog front-end conditions raw PT100 data before sampling via 12-bit ADC. Software-calculated PID corrects error values, dynamically shifting PWM duty-cycle driven through a power MOSFET stage.',
-        de: 'Vollständige Closed-Loop-Temperaturregelung. Der analoge Messverstärker filtert PT100-Signale für den internen ADC. Die Software-PID-Regelung berechnet Stellwerte und steuert die Leistungsstufe über PWM.'
-      },
-      code: 'HAL_ADC_Start(&hadc1);\nif(HAL_ADC_PollForConversion(&hadc1, 10) == HAL_OK) {\n  raw_adc = HAL_ADC_GetValue(&hadc1);\n  temp = convert_to_celsius(raw_adc);\n}\npwm_output = pid_compute(target_temp, temp);\n__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, pwm_output);'
-    },
-    {
-      ref: 'U3',
-      title: { fr: 'Séquences de Commande — Automatisme', en: 'Control Sequences — Automation', de: 'Steuerungssequenzen — Automatisierung' },
-      hardware: {
-        fr: 'Automates Programmables Industriels (API), Environnement CODESYS, Grafcet de sécurité',
-        en: 'Programmable Logic Controllers (PLCs), CODESYS programming suite, Safety Grafcet layers',
-        de: 'Speicherprogrammierbare Steuerungen (SPS), CODESYS-Programmierumgebung, Sicherheits-Grafcet'
-      },
-      desc: {
-        fr: 'Modélisation, implémentation et simulation logicielle de systèmes séquentiels industriels. Création de structures Grafcet complexes comprenant la gestion des modes de marches et d\'arrêts (GEMMA) et des sécurités machines.',
-        en: 'Modeling, structured implementation, and software emulation of discrete industrial processes. Implemented complex state transitions, master-slave PLC configurations, and machine safety procedures.',
-        de: 'Modellierung und Implementierung industrieller Ablaufsteuerungen. Erstellung komplexer Grafcet-Zustandsmaschinen inklusive Not-Aus-Szenarien und Maschinensicherheit.'
-      },
-      code: '(* Ladder Logic structure *)\nIF (Start_Button AND NOT Safety_Stop) THEN\n  Run_Motor := TRUE;\nEND_IF'
+void Afficher_Heure(void) {
+    // Récupérer l'heure et la date courantes (obligatoire dans cet ordre sous HAL)
+    HAL_RTC_GetTime(&hrtc, &sTime, RTC_FORMAT_BIN);
+    HAL_RTC_GetDate(&hrtc, &sDate, RTC_FORMAT_BIN);
+
+    // Formatage en chaîne de caractères
+    sprintf(str_time, "%02d:%02d:%02d\\r\\n", sTime.Hours, sTime.Minutes, sTime.Seconds);
+
+    // 1. Affichage sur terminal PC via l'UART
+    HAL_UART_Transmit(&huart2, (uint8_t*)str_time, strlen(str_time), HAL_MAX_DELAY);
+
+    // 2. Affichage graphique local sur l'écran TFT
+    TFT_SetCursor(10, 10);
+    TFT_Printf(str_time);
+}
+
+int main(void) {
+    HAL_Init();
+    SystemClock_Config();
+    MX_RTC_Init();
+    MX_USART2_UART_Init();
+    TFT_Init();
+
+    while (1) {
+        Afficher_Heure();
+        HAL_Delay(1000); // Rafraîchissement toutes les secondes
+    }
+}`
     }
   ];
 
-  // Grid Builder for labs
   const grid = document.getElementById('labsGrid');
-  grid.innerHTML = labs
-    .filter(l => l.ref.startsWith('L'))
-    .map(l => `
-      <div class="lab-card" onclick="openModal('${l.ref}')">
-        <span class="lab-ref">${l.ref}</span>
-        <h4>
-          <span class="lang-fr">${l.title.fr}</span>
-          <span class="lang-en">${l.title.en}</span>
-          <span class="lang-de">${l.title.de}</span>
-        </h4>
-        <span class="mcu">STM32 · 
-          <span class="lang-fr">TP École</span>
-          <span class="lang-en">Coursework</span>
-          <span class="lang-de">Laborübung</span>
-        </span>
-      </div>
-    `).join('');
+  grid.innerHTML = labs.map(l => `
+    <div class="lab-card" onclick="openModal('${l.ref}')">
+      <span class="lab-ref">${l.ref}</span>
+      <h4>
+        <span class="lang-fr">${l.title.fr}</span>
+        <span class="lang-en">${l.title.en}</span>
+        <span class="lang-de">${l.title.de}</span>
+      </h4>
+      <span class="mcu">STM32F303</span>
+    </div>
+  `).join('');
 
-  // Modal Handling Logic
+  // Modal logic
   let activeRef = null;
 
-  function openModal(ref) {
+  window.openModal = function(ref) {
     activeRef = ref;
-    document.getElementById('systemModal').classList.add('active');
     loadModalContent(ref);
-  }
+    document.getElementById('systemModal').classList.add('active');
+  };
 
-  function closeModal() {
+  window.closeModal = function() {
     document.getElementById('systemModal').classList.remove('active');
     activeRef = null;
-  }
+  };
 
-  function closeModalOnOuterClick(event) {
-    if (event.target === document.getElementById('systemModal')) {
+  window.closeModalOnOuterClick = function(e) {
+    if (e.target.id === 'systemModal') {
       closeModal();
     }
-  }
+  };
 
   function loadModalContent(ref) {
+    const currentLang = langs[currentLangIdx];
+    
+    // Check if it's an extra custom card or a specific lab
     const item = labs.find(l => l.ref === ref);
-    if (!item) return;
+    if(item) {
+      document.getElementById('modalRef').textContent = item.ref;
+      document.getElementById('modalTitle').textContent = item.title[currentLang];
+      document.getElementById('modalHardware').textContent = item.hardware[currentLang];
+      document.getElementById('modalDesc').textContent = item.desc[currentLang];
+      
+      // Escape HTML tags to prevent execution inside modal
+      const codeContainer = document.getElementById('modalCode');
+      codeContainer.textContent = item.code;
+    } else {
+      // Custom Project Cards (U1, U2, U3)
+      const mockProjects = {
+        'U1': {
+          title: { fr: 'Banc de Test Électronique', en: 'Electronic Test Bench', de: 'Elektronischer Prüfstand' },
+          hardware: { fr: 'Oscilloscope, Multimètre, Python PyVISA, GPIB/USB', en: 'Oscilloscope, Multimeter, Python PyVISA, GPIB/USB', de: 'Oszilloskop, Multimeter, Python PyVISA, GPIB/USB' },
+          desc: { 
+            fr: 'Validation de cartes électroniques, programmation d\'instruments pour des tests cycliques automatisés sous Python.',
+            en: 'Hardware-in-the-loop validation of custom PCBA. Programmed laboratory devices using automated PyVISA scripts.',
+            de: 'Hardware-in-the-Loop-Validierung von Leiterplatten. Programmierung von Laborgeräten mit automatisierten PyVISA-Skripten.'
+          },
+          code: `import pyvisa
+rm = pyvisa.ResourceManager()
+scope = rm.open_resource('USB0::0x0957::0x1796::MY50340101::0::INSTR')
+scope.write(":AUToscale")
+print(scope.query("*IDN?"))`
+        },
+        'U2': {
+          title: { fr: 'Système de Régulation Thermique', en: 'Thermal Regulation System', de: 'Thermisches Regelsystem' },
+          hardware: { fr: 'STM32, Capteur de Température, PWM, ADC', en: 'STM32, Temperature Sensor, PWM, ADC', de: 'STM32, Temperatursensor, PWM, ADC' },
+          desc: { 
+            fr: 'Étude d\'un système de régulation thermique. Chaîne de traitement d\'acquisition analogique de température absolue.',
+            en: 'Research-backed development of temperature control systems. Full development of analog acquisition line for absolute temperature.',
+            de: 'Forschungsorientierte Entwicklung von Temperaturregelsystemen. Vollständige Entwicklung des analogen Signalpfads für Absoluttemperatur.'
+          },
+          code: `// Exemple d'acquisition de la température SOT
+uint32_t raw_val = HAL_ADC_GetValue(&hadc1);
+float voltage = (raw_val * 3.3f) / 4095.0f;
+float temp_C = -39.64f + (0.04f * raw_val);`
+        },
+        'U3': {
+          title: { fr: 'Séquences de Commande — Automatisme', en: 'Control Sequences — Automation', de: 'Steuerungssequenzen — Automatisierung' },
+          hardware: { fr: 'PLC Schneider, Logiciel Machine Expert, Grafcet/Ladder', en: 'Schneider PLC, Machine Expert Suite, Grafcet/Ladder', de: 'Schneider PLC, Machine Expert Suite, Grafcet/Ladder' },
+          desc: { 
+            fr: 'Conception logicielle d\'automatisme industriel par modélisation d\'étapes et transitions logiques structurées.',
+            en: 'Software engineering for factory automation. Designed state diagrams, transitional logical blocks and multi-sequence steps.',
+            de: 'Software-Engineering für Industrieanlagen. Entwurf von Zustandsdiagrammen, logischen Funktionsblöcken und Schrittketten.'
+          },
+          code: `// Représentation conceptuelle ST (Structured Text)
+IF Start_Button AND NOT Emergency_Stop THEN
+    Step_1 := TRUE;
+    Timer_Run(IN:=TRUE, PT:=T#5s);
+END_IF`
+        }
+      };
 
-    // Get active language
-    const currentLang = document.documentElement.lang || 'fr';
-
-    // Populate modal
-    document.getElementById('modalRef').textContent = item.ref;
-    document.getElementById('modalTitle').textContent = item.title[currentLang];
-    document.getElementById('modalHardware').textContent = item.hardware[currentLang];
-    document.getElementById('modalDesc').textContent = item.desc[currentLang];
-    document.getElementById('modalCode').textContent = item.code;
+      const proj = mockProjects[ref];
+      if (proj) {
+        document.getElementById('modalRef').textContent = ref;
+        document.getElementById('modalTitle').textContent = proj.title[currentLang];
+        document.getElementById('modalHardware').textContent = proj.hardware[currentLang];
+        document.getElementById('modalDesc').textContent = proj.desc[currentLang];
+        document.getElementById('modalCode').textContent = proj.code;
+      }
+    }
   }
 </script>
-
 </body>
 </html>
