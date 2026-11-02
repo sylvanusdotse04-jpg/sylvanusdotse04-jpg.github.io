@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sylvanus DOTSE — Embedded Systems & Electronics Engineering</title>
-<meta name="description" content="Portfolio de Sylvanus Dotse, étudiant ingénieur en systèmes embarqués, électronique, automatisation et validation système.">
+<meta name="description" content="Portfolio de Sylvanus Dotse, étudiant ingénieur en systèmes embarqués, électronique, Linux embarqué, automatisation et validation système.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -38,11 +38,9 @@
   }
   a{color:inherit;}
 
-  .lang-en, .lang-de {display:none;}
-  body.en .lang-fr, body.en .lang-de {display:none;}
-  body.en .lang-en {display:inline;}
-  body.de .lang-fr, body.de .lang-en {display:none;}
-  body.de .lang-de {display:inline;}
+  .lang-en{display:none;}
+  body.en .lang-fr{display:none;}
+  body.en .lang-en{display:inline;}
 
   .wrap{max-width:1040px; margin:0 auto; padding:0 24px;}
 
@@ -208,22 +206,18 @@
       <a href="#about">
         <span class="lang-fr">Profil</span>
         <span class="lang-en">About</span>
-        <span class="lang-de">Profil</span>
       </a>
       <a href="#projects">
         <span class="lang-fr">Projets d’ingénierie</span>
         <span class="lang-en">Engineering Projects</span>
-        <span class="lang-de">Ingenieurprojekte</span>
       </a>
       <a href="#arduino">
         <span class="lang-fr">Fondamentaux</span>
         <span class="lang-en">Fundamentals</span>
-        <span class="lang-de">Grundlagen</span>
       </a>
       <a href="#labs">
         <span class="lang-fr">Laboratoire embarqué</span>
         <span class="lang-en">Embedded Laboratory</span>
-        <span class="lang-de">Embedded-Labor</span>
       </a>
       <a href="#contact">Contact</a>
       <button class="lang-toggle" id="langToggle">EN</button>
@@ -235,27 +229,23 @@
 
   <section class="hero" style="border-top:none;">
     <div class="eyebrow">
-      <span class="lang-fr">Ingénierie systèmes embarqués · Électronique · Automatisation · Validation</span>
-      <span class="lang-en">Embedded Systems · Electronics · Automation · Validation</span>
-      <span class="lang-de">Eingebettete Systeme · Elektronik · Automatisierung · Validierung</span>
+      <span class="lang-fr">Ingénierie systèmes embarqués · Électronique · Linux embarqué · Automatisation · Validation</span>
+      <span class="lang-en">Embedded Systems · Electronics · Embedded Linux · Automation · Validation</span>
     </div>
     <h1>Sylvanus <span>DOTSE</span></h1>
     <p class="tagline">
-      <span class="lang-fr">Je conçois des systèmes techniques mêlant électronique, logiciels embarqués, automatisation et traitement du signal — de l’acquisition capteur à la validation fonctionnelle.</span>
-      <span class="lang-en">I design technical systems combining electronics, embedded software, automation and signal processing — from sensor acquisition to functional validation.</span>
-      <span class="lang-de">Ich entwickle technische Systeme, die Elektronik, eingebettete Software, Automatisierung und Signalverarbeitung kombinieren — von der Sensorik bis zur funktionalen Validierung.</span>
+      <span class="lang-fr">Je conçois des systèmes techniques mêlant électronique, systèmes embarqués STM32, Linux embarqué, automatisation et traitement du signal — de l’acquisition capteur à la validation fonctionnelle.</span>
+      <span class="lang-en">I design technical systems combining electronics, STM32 embedded systems, embedded Linux, automation and signal processing — from sensor acquisition to functional validation.</span>
     </p>
     <div class="cta-row">
       <button onclick="document.getElementById('projects').scrollIntoView()" class="btn btn-primary">
         <span class="lang-fr">Voir mes projets d’ingénierie</span>
         <span class="lang-en">View engineering projects</span>
-        <span class="lang-de">Ingenieurprojekte ansehen</span>
       </button>
       <a href="https://github.com/sylvanusdotse04-jpg" target="_blank" rel="noopener" class="btn btn-ghost">GitHub ↗</a>
       <button onclick="document.getElementById('contact').scrollIntoView()" class="btn btn-ghost">
         <span class="lang-fr">Me contacter</span>
         <span class="lang-en">Get in touch</span>
-        <span class="lang-de">Kontakt aufnehmen</span>
       </button>
     </div>
     <div class="chaser" id="chaser">
@@ -266,149 +256,151 @@
   </section>
 
   <section id="about">
-    <div class="sec-head"><span class="ref">§01</span><h2><span class="lang-fr">Profil</span><span class="lang-en">About</span><span class="lang-de">Profil</span></h2></div>
+    <div class="sec-head"><span class="ref">§01</span><h2><span class="lang-fr">Profil</span><span class="lang-en">About</span></h2></div>
     <div class="about-grid">
       <div>
         <p>
-          <span class="lang-fr">Actuellement en cycle ingénieur généraliste à l’ISEN Brest, je travaille sur la conception de systèmes mêlant électronique, logiciels embarqués, instrumentation, automatisme et traitement du signal. Je recherche un contrat d’alternance en Validation Système, Tests &amp; Intégration ou Systèmes Embarqués, notamment dans les secteurs automobile, aéronautique et électronique industrielle.</span>
-          <span class="lang-en">Currently in the generalist engineering program at ISEN Brest, I work on systems combining electronics, embedded software, instrumentation, automation and signal processing. I am looking for a work-study position in System Validation, Testing &amp; Integration, or Embedded Systems, particularly in the automotive, aerospace and industrial electronics sectors.</span>
-          <span class="lang-de">Derzeit im allgemeinen Ingenieurstudium an der ISEN Brest, arbeite ich an Systemen, die Elektronik, eingebettete Software, Messtechnik, Automatisierung und Signalverarbeitung kombinieren. Ich suche eine Werkstudentenstelle im Bereich Systemvalidierung, Test &amp; Integration oder Eingebettete Systeme, insbesondere in der Automobil-, Luftfahrt- und Elektronikindustrie.</span>
+          <span class="lang-fr">Actuellement en cycle ingénieur généraliste à l’ISEN Brest, je travaille sur la conception de systèmes mêlant électronique, logiciels embarqués, Linux embarqué, instrumentation, automatisme et traitement du signal. Je recherche un contrat d’alternance en Validation Système, Tests &amp; Intégration ou Systèmes Embarqués, notamment dans les secteurs automobile, aéronautique et électronique industrielle.</span>
+          <span class="lang-en">Currently in the generalist engineering program at ISEN Brest, I work on systems combining electronics, embedded software, embedded Linux, instrumentation, automation and signal processing. I am looking for a work-study position in System Validation, Testing &amp; Integration, or Embedded Systems, particularly in the automotive, aerospace and industrial electronics sectors.</span>
         </p>
         <p>
-          <span class="lang-fr">Mon approche : comprendre le système complet — capteurs, électronique de mesure, microcontrôleur, communication, commande et validation. Je développe des bancs de test, j’automatise des séquences de mesure en Python et je programme des cibles STM32 au niveau des périphériques.</span>
-          <span class="lang-en">My approach: understanding the complete system — sensors, measurement electronics, microcontroller, communication, control and validation. I develop test benches, automate measurement sequences in Python, and program STM32 targets at peripheral level.</span>
-          <span class="lang-de">Mein Ansatz: das Gesamtsystem verstehen — Sensoren, Messelektronik, Mikrocontroller, Kommunikation, Steuerung und Validierung. Ich entwickle Prüfstände, automatisiere Messsequenzen mit Python und programmiere STM32-Ziele auf Peripherieebene.</span>
+          <span class="lang-fr">Mon approche : comprendre le système complet — capteurs, électronique de mesure, microcontrôleur, Linux embarqué, communication, commande et validation. Je développe des bancs de test, j’automatise des séquences de mesure en Python et je programme des cibles STM32 au niveau des périphériques.</span>
+          <span class="lang-en">My approach: understanding the complete system — sensors, measurement electronics, microcontroller, embedded Linux, communication, control and validation. I develop test benches, automate measurement sequences in Python, and program STM32 targets at peripheral level.</span>
         </p>
       </div>
       <div class="datasheet">
         <div class="ds-row">
-          <div class="ds-key"><span class="lang-fr">SYSTÈMES EMBARQUÉS</span><span class="lang-en">EMBEDDED SYSTEMS</span><span class="lang-de">EMBEDDED SYSTEMS</span></div>
+          <div class="ds-key"><span class="lang-fr">SYSTÈMES EMBARQUÉS</span><span class="lang-en">EMBEDDED SYSTEMS</span></div>
           <div class="ds-val">STM32 · C · Firmware · GPIO · Timers · ADC · PWM · UART · I2C · EXTI</div>
         </div>
         <div class="ds-row">
-          <div class="ds-key"><span class="lang-fr">TRAITEMENT DU SIGNAL</span><span class="lang-en">SIGNAL PROCESSING</span><span class="lang-de">SIGNALVERARBEITUNG</span></div>
-          <div class="ds-val"><span class="lang-fr">Échantillonnage · FFT · Filtrage · Convolution · MATLAB · Python</span><span class="lang-en">Sampling · FFT · Filtering · Convolution · MATLAB · Python</span><span class="lang-de">Abtastung · FFT · Filterung · Faltung · MATLAB · Python</span></div>
+          <div class="ds-key"><span class="lang-fr">LINUX EMBARQUÉ</span><span class="lang-en">EMBEDDED LINUX</span></div>
+          <div class="ds-val">Linux · Bash · Shell · SSH · Git · <span class="lang-fr">scripts</span><span class="lang-en">scripting</span></div>
         </div>
         <div class="ds-row">
-          <div class="ds-key"><span class="lang-fr">AUTOMATISME</span><span class="lang-en">AUTOMATION</span><span class="lang-de">AUTOMATISIERUNG</span></div>
-          <div class="ds-val">Grafcet · Ladder · FSM · <span class="lang-fr">Séquenceurs</span><span class="lang-en">Sequencers</span><span class="lang-de">Sequenzer</span> · CAN · LIN</div>
+          <div class="ds-key"><span class="lang-fr">TRAITEMENT DU SIGNAL</span><span class="lang-en">SIGNAL PROCESSING</span></div>
+          <div class="ds-val"><span class="lang-fr">Échantillonnage · FFT · Filtrage · Convolution · MATLAB · Python</span><span class="lang-en">Sampling · FFT · Filtering · Convolution · MATLAB · Python</span></div>
         </div>
         <div class="ds-row">
-          <div class="ds-key"><span class="lang-fr">VALIDATION &amp; TEST</span><span class="lang-en">VALIDATION &amp; TEST</span><span class="lang-de">VALIDIERUNG &amp; TEST</span></div>
+          <div class="ds-key"><span class="lang-fr">AUTOMATISME</span><span class="lang-en">AUTOMATION</span></div>
+          <div class="ds-val">Grafcet · Ladder · FSM · <span class="lang-fr">Séquenceurs</span><span class="lang-en">Sequencers</span> · CAN · LIN</div>
+        </div>
+        <div class="ds-row">
+          <div class="ds-key"><span class="lang-fr">VALIDATION &amp; TEST</span><span class="lang-en">VALIDATION &amp; TEST</span></div>
           <div class="ds-val">Python · PyVISA · Test sequences · Functional verification · Fault diagnosis</div>
         </div>
         <div class="ds-row">
-          <div class="ds-key"><span class="lang-fr">INSTRUMENTATION</span><span class="lang-en">INSTRUMENTATION</span><span class="lang-de">MESSTECHNIK</span></div>
+          <div class="ds-key"><span class="lang-fr">INSTRUMENTATION</span><span class="lang-en">INSTRUMENTATION</span></div>
           <div class="ds-val">Oscilloscope · Multimeter · Logic Analyzer</div>
         </div>
         <div class="ds-row">
-          <div class="ds-key"><span class="lang-fr">LOGICIEL</span><span class="lang-en">SOFTWARE</span><span class="lang-de">SOFTWARE</span></div>
+          <div class="ds-key"><span class="lang-fr">LOGICIEL</span><span class="lang-en">SOFTWARE</span></div>
           <div class="ds-val">C · Python · MATLAB · C# · HTML · CSS · JavaScript · PHP</div>
         </div>
         <div class="ds-row">
-          <div class="ds-key"><span class="lang-fr">LANGUES</span><span class="lang-en">SPOKEN</span><span class="lang-de">SPRACHEN</span></div>
-          <div class="ds-val"><span class="lang-fr">Anglais (natif) · Français (courant) · Allemand (élémentaire)</span><span class="lang-en">English (native) · French (fluent) · German (elementary)</span><span class="lang-de">Englisch (Muttersprache) · Französisch (fließend) · Deutsch (Grundkenntnisse)</span></div>
+          <div class="ds-key"><span class="lang-fr">LANGUES</span><span class="lang-en">SPOKEN</span></div>
+          <div class="ds-val"><span class="lang-fr">Anglais (natif) · Français (courant)</span><span class="lang-en">English (native) · French (fluent)</span></div>
         </div>
       </div>
     </div>
 
     <div class="focus-grid">
       <div class="focus-card">
-        <h3><span class="lang-fr">Systèmes embarqués</span><span class="lang-en">Embedded Systems</span><span class="lang-de">Eingebettete Systeme</span></h3>
-        <p><span class="lang-fr">Conception et programmation STM32 : acquisition de capteurs, contrôle d’actionneurs, temporisation matérielle et communication série.</span><span class="lang-en">STM32 design and programming: sensor acquisition, actuator control, hardware timing and serial communication.</span><span class="lang-de">STM32-Entwicklung: Sensorerfassung, Aktorsteuerung, Hardware-Timing und serielle Kommunikation.</span></p>
+        <h3><span class="lang-fr">Systèmes embarqués</span><span class="lang-en">Embedded Systems</span></h3>
+        <p><span class="lang-fr">Conception et programmation STM32 : acquisition de capteurs, contrôle d’actionneurs, temporisation matérielle et communication série.</span><span class="lang-en">STM32 design and programming: sensor acquisition, actuator control, hardware timing and serial communication.</span></p>
       </div>
       <div class="focus-card">
-        <h3><span class="lang-fr">Validation &amp; diagnostic</span><span class="lang-en">Validation &amp; Diagnosis</span><span class="lang-de">Validierung &amp; Diagnose</span></h3>
-        <p><span class="lang-fr">Définition de cas de test, vérification fonctionnelle, analyse des écarts et diagnostic de défauts.</span><span class="lang-en">Test-case definition, functional verification, deviation analysis and fault diagnosis.</span><span class="lang-de">Testfalldefinition, Funktionsprüfung, Abweichungsanalyse und Fehlerdiagnose.</span></p>
+        <h3><span class="lang-fr">Linux embarqué</span><span class="lang-en">Embedded Linux</span></h3>
+        <p><span class="lang-fr">Environnements Linux, ligne de commande, scripts Bash, SSH, gestion de fichiers et outils de développement pour systèmes embarqués.</span><span class="lang-en">Linux environments, command line, Bash scripting, SSH, file management and development tools for embedded systems.</span></p>
       </div>
       <div class="focus-card">
-        <h3><span class="lang-fr">Traitement du signal</span><span class="lang-en">Signal Processing</span><span class="lang-de">Signalverarbeitung</span></h3>
-        <p><span class="lang-fr">Échantillonnage, filtrage numérique, convolution et analyse spectrale par FFT avec MATLAB et Python.</span><span class="lang-en">Sampling, digital filtering, convolution and FFT-based spectral analysis using MATLAB and Python.</span><span class="lang-de">Abtastung, digitale Filterung, Faltung und FFT-basierte Spektralanalyse mit MATLAB und Python.</span></p>
+        <h3><span class="lang-fr">Validation &amp; diagnostic</span><span class="lang-en">Validation &amp; Diagnosis</span></h3>
+        <p><span class="lang-fr">Définition de cas de test, vérification fonctionnelle, analyse des écarts et diagnostic de défauts.</span><span class="lang-en">Test-case definition, functional verification, deviation analysis and fault diagnosis.</span></p>
       </div>
       <div class="focus-card">
-        <h3><span class="lang-fr">Automatisation</span><span class="lang-en">Automation</span><span class="lang-de">Automatisierung</span></h3>
-        <p><span class="lang-fr">Grafcet, Ladder, machines à états finis, séquenceurs et pilotage d’actionneurs industriels.</span><span class="lang-en">Grafcet, Ladder, finite-state machines, sequencers and industrial actuator control.</span><span class="lang-de">Grafcet, Ladder, endliche Zustandsautomaten, Sequenzer und industrielle Aktorsteuerung.</span></p>
+        <h3><span class="lang-fr">Traitement du signal</span><span class="lang-en">Signal Processing</span></h3>
+        <p><span class="lang-fr">Échantillonnage, filtrage numérique, convolution et analyse spectrale par FFT avec MATLAB et Python.</span><span class="lang-en">Sampling, digital filtering, convolution and FFT-based spectral analysis using MATLAB and Python.</span></p>
+      </div>
+      <div class="focus-card">
+        <h3><span class="lang-fr">Automatisation</span><span class="lang-en">Automation</span></h3>
+        <p><span class="lang-fr">Grafcet, Ladder, machines à états finis, séquenceurs et pilotage d’actionneurs industriels.</span><span class="lang-en">Grafcet, Ladder, finite-state machines, sequencers and industrial actuator control.</span></p>
       </div>
     </div>
   </section>
 
   <section id="method">
-    <div class="sec-head"><span class="ref">§02</span><h2><span class="lang-fr">Méthode d’ingénierie</span><span class="lang-en">Engineering Method</span><span class="lang-de">Ingenieurmethodik</span></h2></div>
+    <div class="sec-head"><span class="ref">§02</span><h2><span class="lang-fr">Méthode d’ingénierie</span><span class="lang-en">Engineering Method</span></h2></div>
     <div class="method-list">
       <div class="method-item">
-        <strong>01 · <span class="lang-fr">Analyse du besoin</span><span class="lang-en">Requirement Analysis</span><span class="lang-de">Anforderungsanalyse</span></strong>
-        <span><span class="lang-fr">Définition des fonctions attendues, des contraintes matérielles et des critères d’acceptation.</span><span class="lang-en">Definition of expected functions, hardware constraints and acceptance criteria.</span><span class="lang-de">Definition der Funktionen, Hardware-Randbedingungen und Abnahmekriterien.</span></span>
+        <strong>01 · <span class="lang-fr">Analyse du besoin</span><span class="lang-en">Requirement Analysis</span></strong>
+        <span><span class="lang-fr">Définition des fonctions attendues, des contraintes matérielles et des critères d’acceptation.</span><span class="lang-en">Definition of expected functions, hardware constraints and acceptance criteria.</span></span>
       </div>
       <div class="method-item">
-        <strong>02 · <span class="lang-fr">Architecture système</span><span class="lang-en">System Architecture</span><span class="lang-de">Systemarchitektur</span></strong>
-        <span><span class="lang-fr">Choix des capteurs, périphériques, bus de communication, actionneurs et structure logicielle.</span><span class="lang-en">Selection of sensors, peripherals, communication buses, actuators and software structure.</span><span class="lang-de">Auswahl von Sensoren, Peripherie, Bussen, Aktoren und Softwarestruktur.</span></span>
+        <strong>02 · <span class="lang-fr">Architecture système</span><span class="lang-en">System Architecture</span></strong>
+        <span><span class="lang-fr">Choix des capteurs, périphériques, bus de communication, actionneurs et structure logicielle.</span><span class="lang-en">Selection of sensors, peripherals, communication buses, actuators and software structure.</span></span>
       </div>
       <div class="method-item">
-        <strong>03 · <span class="lang-fr">Développement &amp; intégration</span><span class="lang-en">Development &amp; Integration</span><span class="lang-de">Entwicklung &amp; Integration</span></strong>
-        <span><span class="lang-fr">Programmation embarquée, configuration des périphériques et intégration matérielle/logicielle.</span><span class="lang-en">Embedded programming, peripheral configuration and hardware/software integration.</span><span class="lang-de">Embedded-Programmierung, Peripheriekonfiguration und Hardware-/Software-Integration.</span></span>
+        <strong>03 · <span class="lang-fr">Développement &amp; intégration</span><span class="lang-en">Development &amp; Integration</span></strong>
+        <span><span class="lang-fr">Programmation embarquée, configuration des périphériques et intégration matérielle/logicielle.</span><span class="lang-en">Embedded programming, peripheral configuration and hardware/software integration.</span></span>
       </div>
       <div class="method-item">
-        <strong>04 · <span class="lang-fr">Validation fonctionnelle</span><span class="lang-en">Functional Validation</span><span class="lang-de">Funktionsvalidierung</span></strong>
-        <span><span class="lang-fr">Exécution de cas de test, vérification du comportement attendu, analyse des écarts et diagnostic.</span><span class="lang-en">Test-case execution, expected-behaviour verification, deviation analysis and diagnosis.</span><span class="lang-de">Testfalldurchführung, Sollverhaltensprüfung, Abweichungsanalyse und Diagnose.</span></span>
+        <strong>04 · <span class="lang-fr">Validation fonctionnelle</span><span class="lang-en">Functional Validation</span></strong>
+        <span><span class="lang-fr">Exécution de cas de test, vérification du comportement attendu, analyse des écarts et diagnostic.</span><span class="lang-en">Test-case execution, expected-behaviour verification, deviation analysis and diagnosis.</span></span>
       </div>
       <div class="method-item">
-        <strong>05 · <span class="lang-fr">Mesure &amp; traçabilité</span><span class="lang-en">Measurement &amp; Traceability</span><span class="lang-de">Messung &amp; Rückverfolgbarkeit</span></strong>
-        <span><span class="lang-fr">Utilisation d’instruments de mesure, journalisation des résultats et documentation technique.</span><span class="lang-en">Use of measurement instruments, result logging and technical documentation.</span><span class="lang-de">Einsatz von Messgeräten, Ergebnisdokumentation und technische Dokumentation.</span></span>
+        <strong>05 · <span class="lang-fr">Mesure &amp; traçabilité</span><span class="lang-en">Measurement &amp; Traceability</span></strong>
+        <span><span class="lang-fr">Utilisation d’instruments de mesure, journalisation des résultats et documentation technique.</span><span class="lang-en">Use of measurement instruments, result logging and technical documentation.</span></span>
       </div>
     </div>
   </section>
 
   <section id="projects">
-    <div class="sec-head"><span class="ref">§03</span><h2><span class="lang-fr">Projets d’ingénierie</span><span class="lang-en">Engineering Projects</span><span class="lang-de">Ingenieurprojekte</span></h2></div>
+    <div class="sec-head"><span class="ref">§03</span><h2><span class="lang-fr">Projets d’ingénierie</span><span class="lang-en">Engineering Projects</span></h2></div>
 
     <div class="proj-card" onclick="openModal('U4')">
       <div class="proj-top">
-        <h3><span class="lang-fr">Banc de Régulation Thermique</span><span class="lang-en">Thermal Regulation Bench</span><span class="lang-de">Thermischer Regelungsprüfstand</span></h3>
+        <h3><span class="lang-fr">Banc de Régulation Thermique</span><span class="lang-en">Thermal Regulation Bench</span></h3>
         <span class="proj-ref">SYS-01</span>
       </div>
       <p>
         <span class="lang-fr">Conception d’un système complet de régulation thermique : modélisation RC des pertes thermiques, acquisition I2C à 100 kHz, commande PWM à 7,9 kHz, boucle PID avec période d’échantillonnage de 500 ms et supervision PC par liaison série à 115200 bauds.</span>
         <span class="lang-en">Design of a complete thermal regulation system: RC modelling of heat losses, 100 kHz I2C acquisition, 7.9 kHz PWM control, PID loop with a 500 ms sampling period and PC supervision over 115200-baud serial communication.</span>
-        <span class="lang-de">Entwicklung eines vollständigen thermischen Regelsystems: RC-Modellierung der Wärmeverluste, 100-kHz-I2C-Erfassung, 7,9-kHz-PWM-Steuerung, PID-Regelkreis mit 500-ms-Abtastperiode und PC-Überwachung über 115200-Baud-Schnittstelle.</span>
       </p>
       <div class="tags"><span class="tag">STM32</span><span class="tag">I2C 100 kHz</span><span class="tag">PWM 7.9 kHz</span><span class="tag">PID</span><span class="tag">UART 115200</span></div>
     </div>
 
     <div class="proj-card" onclick="openModal('U1')">
       <div class="proj-top">
-        <h3><span class="lang-fr">Banc de Test Électronique</span><span class="lang-en">Electronic Test Bench</span><span class="lang-de">Elektronischer Prüfstand</span></h3>
+        <h3><span class="lang-fr">Banc de Test Électronique</span><span class="lang-en">Electronic Test Bench</span></h3>
         <span class="proj-ref">SYS-02</span>
       </div>
       <p>
         <span class="lang-fr">Conception d’un banc de validation fonctionnelle : automatisation d’instruments via Python et PyVISA, exécution de séquences de test reproductibles, contrôle de continuité avec un seuil inférieur à 10 Ω, mesure de tensions et diagnostic de non-conformités.</span>
         <span class="lang-en">Design of a functional validation bench: instrument automation using Python and PyVISA, repeatable test-sequence execution, continuity checking below a 10 Ω threshold, voltage measurement and non-conformity diagnosis.</span>
-        <span class="lang-de">Entwicklung eines Prüfstands zur funktionalen Validierung: Instrumentenautomatisierung mit Python und PyVISA, wiederholbare Testsequenzen, Durchgangsprüfung unter 10 Ω, Spannungsmessung und Diagnose von Nichtkonformitäten.</span>
       </p>
       <div class="tags"><span class="tag">Python</span><span class="tag">PyVISA</span><span class="tag">Test Automation</span><span class="tag">Functional Validation</span></div>
     </div>
 
     <div class="proj-card" onclick="openModal('U2')">
       <div class="proj-top">
-        <h3><span class="lang-fr">Système Embarqué de Régulation Thermique</span><span class="lang-en">Embedded Thermal Regulation System</span><span class="lang-de">Eingebettetes thermisches Regelsystem</span></h3>
+        <h3><span class="lang-fr">Système Embarqué de Régulation Thermique</span><span class="lang-en">Embedded Thermal Regulation System</span></h3>
         <span class="proj-ref">SYS-03</span>
       </div>
       <p>
         <span class="lang-fr">Développement d’une chaîne embarquée STM32 : acquisition analogique 12 bits sur une plage de 0 à 3,3 V, traitement de la consigne, génération PWM à 10 kHz, boucle de régulation à 2 Hz et supervision UART à 115200 bauds.</span>
         <span class="lang-en">Development of an STM32 embedded chain: 12-bit analog acquisition over a 0–3.3 V range, setpoint processing, 10 kHz PWM generation, 2 Hz control loop and 115200-baud UART supervision.</span>
-        <span class="lang-de">Entwicklung einer STM32-Embedded-Kette: 12-Bit-Analogerfassung im Bereich 0–3,3 V, Sollwertverarbeitung, 10-kHz-PWM-Erzeugung, 2-Hz-Regelkreis und 115200-Baud-UART-Überwachung.</span>
       </p>
       <div class="tags"><span class="tag">STM32L152</span><span class="tag">ADC 12-bit</span><span class="tag">PWM 10 kHz</span><span class="tag">I2C</span><span class="tag">UART</span></div>
     </div>
 
     <div class="proj-card" onclick="openModal('U3')">
       <div class="proj-top">
-        <h3><span class="lang-fr">Automatisme &amp; Séquences de Commande</span><span class="lang-en">Automation &amp; Control Sequences</span><span class="lang-de">Automatisierung &amp; Steuerungssequenzen</span></h3>
+        <h3><span class="lang-fr">Automatisme &amp; Séquences de Commande</span><span class="lang-en">Automation &amp; Control Sequences</span></h3>
         <span class="proj-ref">SYS-04</span>
       </div>
       <p>
         <span class="lang-fr">Modélisation et validation de séquenceurs industriels à l’aide de Grafcet, Ladder et machines à états finis : gestion des étapes, transitions conditionnelles, arrêts sécurisés et pilotage d’actionneurs.</span>
         <span class="lang-en">Modelling and validation of industrial sequencers using Grafcet, Ladder and finite-state machines: step management, conditional transitions, safe stops and actuator control.</span>
-        <span class="lang-de">Modellierung und Validierung industrieller Sequenzer mit Grafcet, Ladder und endlichen Zustandsautomaten: Schrittketten, bedingte Transitionen, sichere Stopps und Aktorsteuerung.</span>
       </p>
       <div class="tags"><span class="tag">Grafcet</span><span class="tag">Ladder</span><span class="tag">FSM</span><span class="tag">Safety Logic</span></div>
     </div>
@@ -420,47 +412,44 @@
       <h2>
         <span class="lang-fr">Fondamentaux &amp; Prototypage</span>
         <span class="lang-en">Fundamentals &amp; Prototyping</span>
-        <span class="lang-de">Grundlagen &amp; Prototyping</span>
       </h2>
     </div>
     <div class="arduino-grid" id="arduinoGrid"></div>
     <p class="arduino-note">
       <span class="lang-fr">// Démonstrateurs techniques réalisés de manière autonome pour consolider les bases : GPIO, capteurs, actionneurs, communication, PWM, machines à états et robotique mobile.</span>
       <span class="lang-en">// Independent technical demonstrators built to consolidate fundamentals: GPIO, sensors, actuators, communication, PWM, state machines and mobile robotics.</span>
-      <span class="lang-de">// Eigenständig entwickelte technische Demonstratoren zur Festigung von Grundlagen: GPIO, Sensoren, Aktoren, Kommunikation, PWM, Zustandsautomaten und mobile Robotik.</span>
     </p>
   </section>
 
   <section id="labs">
-    <div class="sec-head"><span class="ref">§05</span><h2><span class="lang-fr">Laboratoire embarqué STM32</span><span class="lang-en">Embedded Systems Laboratory</span><span class="lang-de">Embedded-Systems-Labor</span></h2></div>
+    <div class="sec-head"><span class="ref">§05</span><h2><span class="lang-fr">Laboratoire embarqué STM32</span><span class="lang-en">Embedded Systems Laboratory</span></h2></div>
     <div class="labs-grid" id="labsGrid"></div>
     <p class="labs-note">
       <span class="lang-fr">// Briques techniques maîtrisées sur cible STM32 : configuration de périphériques, interruptions, temporisation matérielle, acquisition analogique, PWM et communication I2C.</span>
       <span class="lang-en">// Core embedded engineering building blocks on STM32: peripheral configuration, interrupts, hardware timing, analog acquisition, PWM and I2C communication.</span>
-      <span class="lang-de">// Zentrale Embedded-Engineering-Bausteine auf STM32: Peripheriekonfiguration, Interrupts, Hardware-Timing, analoge Erfassung, PWM und I2C-Kommunikation.</span>
     </p>
   </section>
 
   <section id="experience">
-    <div class="sec-head"><span class="ref">§06</span><h2><span class="lang-fr">Expérience</span><span class="lang-en">Experience</span><span class="lang-de">Berufserfahrung</span></h2></div>
+    <div class="sec-head"><span class="ref">§06</span><h2><span class="lang-fr">Expérience</span><span class="lang-en">Experience</span></h2></div>
     <div class="exp-item">
-      <div class="exp-date">2025<span class="lang-fr"> — Juin/Août</span><span class="lang-en"> — Jun/Aug</span><span class="lang-de"> — Jun/Aug</span></div>
+      <div class="exp-date">2025<span class="lang-fr"> — Juin/Août</span><span class="lang-en"> — Jun/Aug</span></div>
       <div>
-        <h4><span class="lang-fr">Assistant Conducteur de Travaux</span><span class="lang-en">Site Supervision Assistant</span><span class="lang-de">Assistent der Bauleitung</span></h4>
+        <h4><span class="lang-fr">Assistant Conducteur de Travaux</span><span class="lang-en">Site Supervision Assistant</span></h4>
         <p>Master Builder — Lomé, Togo</p>
       </div>
     </div>
     <div class="exp-item">
-      <div class="exp-date">2024<span class="lang-fr"> — Juil/Août</span><span class="lang-en"> — Jul/Aug</span><span class="lang-de"> — Jul/Aug</span></div>
+      <div class="exp-date">2024<span class="lang-fr"> — Juil/Août</span><span class="lang-en"> — Jul/Aug</span></div>
       <div>
-        <h4><span class="lang-fr">Responsable d’Équipe / Animateur</span><span class="lang-en">Team Lead / Activity Coordinator</span><span class="lang-de">Teamleiter / Betreuer</span></h4>
+        <h4><span class="lang-fr">Responsable d’Équipe / Animateur</span><span class="lang-en">Team Lead / Activity Coordinator</span></h4>
         <p>Centre Social Les Amarres — Brest</p>
       </div>
     </div>
     <div class="exp-item">
       <div class="exp-date">2024–2025</div>
       <div>
-        <h4><span class="lang-fr">Équipier Polyvalent</span><span class="lang-en">Team Member</span><span class="lang-de">Allround-Mitarbeiter</span></h4>
+        <h4><span class="lang-fr">Équipier Polyvalent</span><span class="lang-en">Team Member</span></h4>
         <p>KFC — Brest</p>
       </div>
     </div>
@@ -470,11 +459,10 @@
 
 <footer id="contact">
   <div class="wrap">
-    <h2><span class="lang-fr">Discutons</span><span class="lang-en">Let’s talk</span><span class="lang-de">Kontakt</span></h2>
+    <h2><span class="lang-fr">Discutons</span><span class="lang-en">Let’s talk</span></h2>
     <p>
       <span class="lang-fr">Ouvert à un contrat d’alternance en Validation Système, Tests &amp; Intégration ou Systèmes Embarqués dès septembre 2026.</span>
       <span class="lang-en">Open to a work-study contract in System Validation, Testing &amp; Integration, or Embedded Systems starting September 2026.</span>
-      <span class="lang-de">Verfügbar für eine Werkstudentenstelle im Bereich Systemvalidierung, Test &amp; Integration oder Eingebettete Systeme ab September 2026.</span>
     </p>
     <div class="contact-row">
       <a class="btn btn-primary" href="mailto:komi-sylvanus.dotse@isen-ouest.yncrea.fr">Email ↗</a>
@@ -496,7 +484,6 @@
         <div class="modal-section-title">
           <span class="lang-fr">Matériel &amp; périphériques</span>
           <span class="lang-en">Hardware &amp; Peripherals</span>
-          <span class="lang-de">Hardware &amp; Peripherie</span>
         </div>
         <div class="modal-section-content" id="modalHardware"></div>
       </div>
@@ -504,7 +491,6 @@
         <div class="modal-section-title">
           <span class="lang-fr">Approche technique</span>
           <span class="lang-en">Technical Approach</span>
-          <span class="lang-de">Technischer Ansatz</span>
         </div>
         <div class="modal-section-content" id="modalDesc"></div>
       </div>
@@ -512,7 +498,6 @@
         <div class="modal-section-title">
           <span class="lang-fr">Démarche de validation</span>
           <span class="lang-en">Validation Approach</span>
-          <span class="lang-de">Validierungsansatz</span>
         </div>
         <div class="modal-section-content" id="modalValidation"></div>
       </div>
@@ -520,7 +505,6 @@
         <div class="modal-section-title">
           <span class="lang-fr">Implémentation technique</span>
           <span class="lang-en">Technical Implementation</span>
-          <span class="lang-de">Technische Umsetzung</span>
         </div>
         <pre><code class="modal-section-content" id="modalCode" style="font-family:var(--font-mono); background:rgba(0,0,0,0.3); padding:15px; border-radius:var(--radius); font-size:12.5px; white-space: pre-wrap; display:block; overflow-x:auto; color:#a9beb2; border:1px solid var(--trace);"></code></pre>
       </div>
@@ -529,7 +513,7 @@
 </div>
 
 <script>
-  const langs = ['fr', 'en', 'de'];
+  const langs = ['fr', 'en'];
   let currentLangIdx = 0;
   const btn = document.getElementById('langToggle');
 
@@ -537,12 +521,9 @@
     currentLangIdx = (currentLangIdx + 1) % langs.length;
     const currentLang = langs[currentLangIdx];
 
-    document.body.classList.remove('en', 'de');
+    document.body.classList.remove('en');
     if (currentLang === 'en') {
       document.body.classList.add('en');
-      btn.textContent = 'DE';
-    } else if (currentLang === 'de') {
-      document.body.classList.add('de');
       btn.textContent = 'FR';
     } else {
       btn.textContent = 'EN';
@@ -565,25 +546,18 @@
   const projectsData = {
     'U4': {
       ref: 'SYS-01',
-      title: { 
-        fr: 'Banc de Régulation Thermique', 
-        en: 'Thermal Regulation Bench', 
-        de: 'Thermischer Regelungsprüfstand' 
-      },
+      title: { fr: 'Banc de Régulation Thermique', en: 'Thermal Regulation Bench' },
       hardware: {
         fr: 'Maquette RC analogique, capteur de température I2C, pont en H, STM32 Nucleo, interface de supervision Python.',
-        en: 'Analog RC thermal model, I2C temperature sensor, H-bridge driver, STM32 Nucleo, Python supervision interface.',
-        de: 'Analoges RC-Thermalmodell, I2C-Temperatursensor, H-Brücken-Treiber, STM32 Nucleo, Python-Überwachungsschnittstelle.'
+        en: 'Analog RC thermal model, I2C temperature sensor, H-bridge driver, STM32 Nucleo, Python supervision interface.'
       },
       desc: {
         fr: 'Conception d’un système de régulation thermique complet : modélisation des pertes thermiques par réseau RC, acquisition I2C à 100 kHz, commande PWM à 7,9 kHz, régulation PID avec période d’échantillonnage de 500 ms et transmission des mesures vers une interface PC par UART à 115200 bauds.',
-        en: 'Design of a complete thermal regulation system: RC-network heat-loss modelling, 100 kHz I2C acquisition, 7.9 kHz PWM control, PID regulation with a 500 ms sampling period and telemetry streaming to a PC interface over 115200-baud UART.',
-        de: 'Entwicklung eines vollständigen thermischen Regelsystems: RC-Modellierung der Wärmeverluste, 100-kHz-I2C-Erfassung, 7,9-kHz-PWM-Steuerung, PID-Regelung mit 500-ms-Abtastperiode und Telemetrie über 115200-Baud-UART.'
+        en: 'Design of a complete thermal regulation system: RC-network heat-loss modelling, 100 kHz I2C acquisition, 7.9 kHz PWM control, PID regulation with a 500 ms sampling period and telemetry streaming to a PC interface over 115200-baud UART.'
       },
       validation: {
         fr: 'Validation du comportement dynamique du système : vérification de la consigne, de la commande PWM, de la stabilité de la boucle PID et de la cohérence des mesures transmises au PC.',
-        en: 'Validation of the system dynamic behaviour: setpoint verification, PWM command checking, PID-loop stability assessment and consistency of telemetry data.',
-        de: 'Validierung des dynamischen Systemverhaltens: Sollwertprüfung, PWM-Steuerung, Stabilität des PID-Regelkreises und Konsistenz der Telemetriedaten.'
+        en: 'Validation of the system dynamic behaviour: setpoint verification, PWM command checking, PID-loop stability assessment and consistency of telemetry data.'
       },
       code: `float computePID(float setpoint, float temperature) {
     float error = setpoint - temperature;
@@ -600,25 +574,18 @@
     },
     'U1': {
       ref: 'SYS-02',
-      title: { 
-        fr: 'Banc de Test Électronique', 
-        en: 'Electronic Test Bench', 
-        de: 'Elektronischer Prüfstand' 
-      },
+      title: { fr: 'Banc de Test Électronique', en: 'Electronic Test Bench' },
       hardware: {
         fr: 'Oscilloscope Keysight, multimètre numérique, interface GPIB/USB, scripts Python PyVISA.',
-        en: 'Keysight oscilloscope, digital multimeter, GPIB/USB interface, Python PyVISA scripts.',
-        de: 'Keysight-Oszilloskop, Digitalmultimeter, GPIB/USB-Schnittstelle, Python-PyVISA-Skripte.'
+        en: 'Keysight oscilloscope, digital multimeter, GPIB/USB interface, Python PyVISA scripts.'
       },
       desc: {
         fr: 'Conception d’un banc de validation fonctionnelle pour cartes électroniques : automatisation des instruments, exécution de séquences de test reproductibles, contrôle de continuité avec un seuil inférieur à 10 Ω, mesure de tensions et diagnostic de non-conformités.',
-        en: 'Design of a functional validation bench for electronic boards: instrument automation, repeatable test-sequence execution, continuity checking below a 10 Ω threshold, voltage measurement and non-conformity diagnosis.',
-        de: 'Entwicklung eines Prüfstands zur funktionalen Validierung elektronischer Platinen: Instrumentenautomatisierung, wiederholbare Testsequenzen, Durchgangsprüfung unter 10 Ω, Spannungsmessung und Diagnose von Nichtkonformitäten.'
+        en: 'Design of a functional validation bench for electronic boards: instrument automation, repeatable test-sequence execution, continuity checking below a 10 Ω threshold, voltage measurement and non-conformity diagnosis.'
       },
       validation: {
         fr: 'Démarche fondée sur des cas de test reproductibles, la comparaison des mesures aux critères d’acceptation, la journalisation des résultats et l’identification des écarts.',
-        en: 'Approach based on repeatable test cases, comparison of measurements against acceptance criteria, result logging and deviation identification.',
-        de: 'Ansatz basierend auf wiederholbaren Testfällen, Vergleich der Messwerte mit Abnahmekriterien, Ergebnisdokumentation und Abweichungsanalyse.'
+        en: 'Approach based on repeatable test cases, comparison of measurements against acceptance criteria, result logging and deviation identification.'
       },
       code: `import pyvisa
 
@@ -630,25 +597,18 @@ print(scope.query('*IDN?'))`
     },
     'U2': {
       ref: 'SYS-03',
-      title: { 
-        fr: 'Système Embarqué de Régulation Thermique', 
-        en: 'Embedded Thermal Regulation System', 
-        de: 'Eingebettetes thermisches Regelsystem' 
-      },
+      title: { fr: 'Système Embarqué de Régulation Thermique', en: 'Embedded Thermal Regulation System' },
       hardware: {
         fr: 'STM32L152, capteurs de température I2C, afficheur TFT 128 × 160, interface USB FTDI, sortie PWM.',
-        en: 'STM32L152, I2C temperature sensors, 128 × 160 TFT display, FTDI USB interface, PWM output.',
-        de: 'STM32L152, I2C-Temperatursensoren, 128 × 160 TFT-Display, FTDI-USB-Schnittstelle, PWM-Ausgang.'
+        en: 'STM32L152, I2C temperature sensors, 128 × 160 TFT display, FTDI USB interface, PWM output.'
       },
       desc: {
         fr: 'Développement d’une chaîne embarquée de régulation : acquisition analogique 12 bits sur 0 à 3,3 V, traitement de la consigne, génération PWM à 10 kHz, boucle de régulation à 2 Hz et supervision UART à 115200 bauds.',
-        en: 'Development of an embedded regulation chain: 12-bit analog acquisition over 0–3.3 V, setpoint processing, 10 kHz PWM generation, 2 Hz control loop and 115200-baud UART supervision.',
-        de: 'Entwicklung einer eingebetteten Regelungskette: 12-Bit-Analogerfassung über 0–3,3 V, Sollwertverarbeitung, 10-kHz-PWM-Erzeugung, 2-Hz-Regelkreis und 115200-Baud-UART-Überwachung.'
+        en: 'Development of an embedded regulation chain: 12-bit analog acquisition over 0–3.3 V, setpoint processing, 10 kHz PWM generation, 2 Hz control loop and 115200-baud UART supervision.'
       },
       validation: {
         fr: 'Validation fonctionnelle de la chaîne d’acquisition, de la cohérence de la consigne, du rapport cyclique PWM et de la communication de supervision.',
-        en: 'Functional validation of the acquisition chain, setpoint consistency, PWM duty cycle and supervision communication.',
-        de: 'Funktionale Validierung der Erfassungskette, der Sollwertkonsistenz, des PWM-Tastverhältnisses und der Überwachungskommunikation.'
+        en: 'Functional validation of the acquisition chain, setpoint consistency, PWM duty cycle and supervision communication.'
       },
       code: `void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
     if (GPIO_Pin == GPIO_PIN_11) system_state = 1;
@@ -661,25 +621,18 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     },
     'U3': {
       ref: 'SYS-04',
-      title: { 
-        fr: 'Automatisme & Séquences de Commande', 
-        en: 'Automation & Control Sequences', 
-        de: 'Automatisierung & Steuerungssequenzen' 
-      },
+      title: { fr: 'Automatisme & Séquences de Commande', en: 'Automation & Control Sequences' },
       hardware: {
         fr: 'Automate / contrôleur STM32, simulateurs de capteurs et d’actionneurs, environnement Grafcet.',
-        en: 'PLC / STM32 controller, sensor and actuator simulators, Grafcet development environment.',
-        de: 'SPS / STM32-Controller, Sensor- und Aktorsimulatoren, Grafcet-Entwicklungsumgebung.'
+        en: 'PLC / STM32 controller, sensor and actuator simulators, Grafcet development environment.'
       },
       desc: {
         fr: 'Modélisation et validation de séquenceurs industriels : Grafcet, Ladder, machines à états finis, gestion des étapes, transitions conditionnelles, sécurisation des arrêts et pilotage d’actionneurs.',
-        en: 'Modelling and validation of industrial sequencers: Grafcet, Ladder, finite-state machines, step management, conditional transitions, safe stops and actuator control.',
-        de: 'Modellierung und Validierung industrieller Sequenzer: Grafcet, Ladder, endliche Zustandsautomaten, Schrittketten, bedingte Transitionen, sichere Stopps und Aktorsteuerung.'
+        en: 'Modelling and validation of industrial sequencers: Grafcet, Ladder, finite-state machines, step management, conditional transitions, safe stops and actuator control.'
       },
       validation: {
         fr: 'Validation par analyse des états, des transitions, des conditions d’entrée et des comportements de mise en sécurité.',
-        en: 'Validation through state analysis, transition checking, input-condition verification and safety-behaviour assessment.',
-        de: 'Validierung durch Zustandsanalyse, Transitionsprüfung, Eingangsbedingungen und Sicherheitsverhalten.'
+        en: 'Validation through state analysis, transition checking, input-condition verification and safety-behaviour assessment.'
       },
       code: `typedef enum {
     STATE_INIT,
@@ -706,21 +659,15 @@ void process_logic(uint8_t sensor, uint8_t emergency_stop) {
     },
     'A01': {
       ref: 'PR-01',
-      title: { fr: 'LED clignotante', en: 'Blinking LED', de: 'Blinkende LED' },
-      hardware: {
-        fr: 'Arduino Uno, LED, résistance 220 Ω, breadboard.',
-        en: 'Arduino Uno, LED, 220 Ω resistor, breadboard.',
-        de: 'Arduino Uno, LED, 220-Ω-Widerstand, Breadboard.'
-      },
+      title: { fr: 'LED clignotante', en: 'Blinking LED' },
+      hardware: { fr: 'Arduino Uno, LED, résistance 220 Ω, breadboard.', en: 'Arduino Uno, LED, 220 Ω resistor, breadboard.' },
       desc: {
         fr: 'Démonstrateur d’initiation : configuration d’une sortie GPIO et contrôle temporel d’un actionneur simple avec une période de commutation de 1 s.',
-        en: 'Introductory demonstrator: GPIO output configuration and basic actuator timing control with a 1 s switching period.',
-        de: 'Einstiegsdemonstrator: GPIO-Ausgangskonfiguration und grundlegende Aktorsteuerung mit 1-s-Schaltperiode.'
+        en: 'Introductory demonstrator: GPIO output configuration and basic actuator timing control with a 1 s switching period.'
       },
       validation: {
         fr: 'Vérification du comportement périodique de la sortie et du respect de la temporisation définie.',
-        en: 'Verification of periodic output behaviour and compliance with the defined timing.',
-        de: 'Prüfung des periodischen Ausgangsverhaltens und der definierten Zeitvorgabe.'
+        en: 'Verification of periodic output behaviour and compliance with the defined timing.'
       },
       code: `void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
@@ -735,21 +682,15 @@ void loop() {
     },
     'A02': {
       ref: 'PR-02',
-      title: { fr: 'Entrée numérique & anti-rebond', en: 'Digital Input & Debouncing', de: 'Digitaler Eingang & Entprellung' },
-      hardware: {
-        fr: 'Arduino Uno, bouton-poussoir, résistance pull-down 10 kΩ, LED.',
-        en: 'Arduino Uno, push-button, 10 kΩ pull-down resistor, LED.',
-        de: 'Arduino Uno, Taster, 10-kΩ-Pull-Down-Widerstand, LED.'
-      },
+      title: { fr: 'Entrée numérique & anti-rebond', en: 'Digital Input & Debouncing' },
+      hardware: { fr: 'Arduino Uno, bouton-poussoir, résistance pull-down 10 kΩ, LED.', en: 'Arduino Uno, push-button, 10 kΩ pull-down resistor, LED.' },
       desc: {
         fr: 'Lecture fiable d’une entrée numérique par filtrage logiciel des rebonds mécaniques sur une fenêtre de 50 ms, sans bloquer l’exécution du programme.',
-        en: 'Reliable digital input reading through software debounce filtering over a 50 ms window, without blocking program execution.',
-        de: 'Zuverlässiges Einlesen digitaler Eingänge durch softwarebasierte Entprellung über 50 ms ohne blockierende Ausführung.'
+        en: 'Reliable digital input reading through software debounce filtering over a 50 ms window, without blocking program execution.'
       },
       validation: {
         fr: 'Vérification de la stabilité de la lecture malgré les rebonds mécaniques du bouton.',
-        en: 'Verification of input-reading stability despite mechanical button bounce.',
-        de: 'Prüfung der Stabilität der Eingangserfassung trotz mechanischem Prellen.'
+        en: 'Verification of input-reading stability despite mechanical button bounce.'
       },
       code: `const int buttonPin = 2;
 const int ledPin = 13;
@@ -783,21 +724,15 @@ void loop() {
     },
     'A03': {
       ref: 'PR-03',
-      title: { fr: 'Séquenceur — feu tricolore', en: 'Sequencer — Traffic Light', de: 'Sequenzer — Ampelsteuerung' },
-      hardware: {
-        fr: 'Arduino Uno, 3 LEDs, résistances 220 Ω, câblage.',
-        en: 'Arduino Uno, 3 LEDs, 220 Ω resistors, wiring.',
-        de: 'Arduino Uno, 3 LEDs, 220-Ω-Widerstände, Verkabelung.'
-      },
+      title: { fr: 'Séquenceur — feu tricolore', en: 'Sequencer — Traffic Light' },
+      hardware: { fr: 'Arduino Uno, 3 LEDs, résistances 220 Ω, câblage.', en: 'Arduino Uno, 3 LEDs, 220 Ω resistors, wiring.' },
       desc: {
         fr: 'Machine à états finis pour le séquencement temporel d’un système à trois sorties : rouge 5 s, vert 4 s et orange 1,5 s, soit un cycle complet d’environ 10,5 s.',
-        en: 'Finite-state machine for time-based sequencing of a three-output system: red 5 s, green 4 s and amber 1.5 s, giving a complete cycle of approximately 10.5 s.',
-        de: 'Endlicher Zustandsautomat zur zeitbasierten Sequenzsteuerung eines Drei-Kanal-Systems: Rot 5 s, Grün 4 s und Gelb 1,5 s, Gesamtdauer etwa 10,5 s.'
+        en: 'Finite-state machine for time-based sequencing of a three-output system: red 5 s, green 4 s and amber 1.5 s, giving a complete cycle of approximately 10.5 s.'
       },
       validation: {
         fr: 'Vérification de la séquence, des durées d’état et des transitions entre les phases.',
-        en: 'Verification of sequence order, state durations and transitions between phases.',
-        de: 'Prüfung der Sequenz, der Zustandsdauern und der Phasenübergänge.'
+        en: 'Verification of sequence order, state durations and transitions between phases.'
       },
       code: `enum State { RED, GREEN, YELLOW };
 State current = RED;
@@ -821,21 +756,15 @@ void loop() {
     },
     'A04': {
       ref: 'PR-04',
-      title: { fr: 'Génération de signaux sonores', en: 'Sound Signal Generation', de: 'Schallsignalerzeugung' },
-      hardware: {
-        fr: 'Arduino Uno, buzzer piézoélectrique passif.',
-        en: 'Arduino Uno, passive piezo buzzer.',
-        de: 'Arduino Uno, passiver Piezo-Buzzer.'
-      },
+      title: { fr: 'Génération de signaux sonores', en: 'Sound Signal Generation' },
+      hardware: { fr: 'Arduino Uno, buzzer piézoélectrique passif.', en: 'Arduino Uno, passive piezo buzzer.' },
       desc: {
         fr: 'Génération de signaux carrés à fréquence contrôlée entre 200 Hz et 2 kHz pour produire des tonalités et des séquences temporelles.',
-        en: 'Generation of frequency-controlled square waves between 200 Hz and 2 kHz to produce tones and timed sequences.',
-        de: 'Erzeugung frequenzgesteuerter Rechtecksignale zwischen 200 Hz und 2 kHz für Töne und zeitliche Sequenzen.'
+        en: 'Generation of frequency-controlled square waves between 200 Hz and 2 kHz to produce tones and timed sequences.'
       },
       validation: {
         fr: 'Vérification des fréquences générées et du rythme des séquences sonores.',
-        en: 'Verification of generated frequencies and sound-sequence timing.',
-        de: 'Prüfung der erzeugten Frequenzen und des Timings der Tonsequenzen.'
+        en: 'Verification of generated frequencies and sound-sequence timing.'
       },
       code: `int melody[] = {262, 196, 220, 247};
 int durations[] = {4, 8, 8, 4};
@@ -852,21 +781,15 @@ void loop() {}`
     },
     'A05': {
       ref: 'PR-05',
-      title: { fr: 'Acquisition environnementale', en: 'Environmental Acquisition', de: 'Umweltdatenerfassung' },
-      hardware: {
-        fr: 'Arduino Uno, capteur DHT11/DHT22, écran LCD 16 × 2 I2C.',
-        en: 'Arduino Uno, DHT11/DHT22 sensor, 16 × 2 I2C LCD display.',
-        de: 'Arduino Uno, DHT11/DHT22-Sensor, 16 × 2 I2C-LCD-Display.'
-      },
+      title: { fr: 'Acquisition environnementale', en: 'Environmental Acquisition' },
+      hardware: { fr: 'Arduino Uno, capteur DHT11/DHT22, écran LCD 16 × 2 I2C.', en: 'Arduino Uno, DHT11/DHT22 sensor, 16 × 2 I2C LCD display.' },
       desc: {
         fr: 'Acquisition périodique de température et d’humidité toutes les 2 secondes, traitement des mesures et affichage sur écran LCD via bus I2C à 100 kHz.',
-        en: 'Periodic temperature and humidity acquisition every 2 seconds, measurement processing and display output over a 100 kHz I2C bus.',
-        de: 'Periodische Erfassung von Temperatur und Luftfeuchtigkeit alle 2 Sekunden, Messwertverarbeitung und Anzeige über einen 100-kHz-I2C-Bus.'
+        en: 'Periodic temperature and humidity acquisition every 2 seconds, measurement processing and display output over a 100 kHz I2C bus.'
       },
       validation: {
         fr: 'Vérification de la cohérence des mesures, du rafraîchissement de l’affichage et de la communication I2C.',
-        en: 'Verification of measurement consistency, display refresh and I2C communication.',
-        de: 'Prüfung der Messwertkonsistenz, der Display-Aktualisierung und der I2C-Kommunikation.'
+        en: 'Verification of measurement consistency, display refresh and I2C communication.'
       },
       code: `float temperature = dht.readTemperature();
 float humidity = dht.readHumidity();
@@ -881,21 +804,15 @@ lcd.print(humidity);`
     },
     'A06': {
       ref: 'PR-06',
-      title: { fr: 'Détection d’événement PIR', en: 'PIR Event Detection', de: 'PIR-Ereigniserkennung' },
-      hardware: {
-        fr: 'Arduino Uno, capteur PIR HC-SR501, LED, buzzer.',
-        en: 'Arduino Uno, HC-SR501 PIR sensor, LED, buzzer.',
-        de: 'Arduino Uno, HC-SR501-PIR-Sensor, LED, Summer.'
-      },
+      title: { fr: 'Détection d’événement PIR', en: 'PIR Event Detection' },
+      hardware: { fr: 'Arduino Uno, capteur PIR HC-SR501, LED, buzzer.', en: 'Arduino Uno, HC-SR501 PIR sensor, LED, buzzer.' },
       desc: {
         fr: 'Interface avec un capteur de présence et déclenchement d’une alarme visuelle et sonore lors d’un front montant du signal de détection.',
-        en: 'Interface with a presence sensor and triggering of visual and audible alerts upon a rising edge of the detection signal.',
-        de: 'Anbindung eines Präsenzsensors und Auslösung optischer und akustischer Alarme bei steigender Flanke des Detektionssignals.'
+        en: 'Interface with a presence sensor and triggering of visual and audible alerts upon a rising edge of the detection signal.'
       },
       validation: {
         fr: 'Vérification de la détection d’événement, du temps de maintien et du déclenchement des alarmes.',
-        en: 'Verification of event detection, hold time and alarm triggering.',
-        de: 'Prüfung der Ereigniserkennung, der Haltezeit und der Alarmauslösung.'
+        en: 'Verification of event detection, hold time and alarm triggering.'
       },
       code: `if (digitalRead(PIR_PIN) == HIGH) {
   digitalWrite(ALARM_PIN, HIGH);
@@ -905,21 +822,15 @@ lcd.print(humidity);`
     },
     'A07': {
       ref: 'PR-07',
-      title: { fr: 'Régulation tout-ou-rien', en: 'On/Off Control System', de: 'Zweipunktregelung' },
-      hardware: {
-        fr: 'Arduino Uno, capteur LM35, potentiomètre, relais 5 V.',
-        en: 'Arduino Uno, LM35 sensor, potentiometer, 5 V relay.',
-        de: 'Arduino Uno, LM35-Sensor, Potentiometer, 5-V-Relais.'
-      },
+      title: { fr: 'Régulation tout-ou-rien', en: 'On/Off Control System' },
+      hardware: { fr: 'Arduino Uno, capteur LM35, potentiomètre, relais 5 V.', en: 'Arduino Uno, LM35 sensor, potentiometer, 5 V relay.' },
       desc: {
         fr: 'Régulation thermique tout-ou-rien avec hystérésis de 0,5 °C : lecture analogique de température, réglage de consigne entre 15 et 30 °C et commande d’un relais de puissance.',
-        en: 'On/off thermal control with 0.5 °C hysteresis: analog temperature reading, 15–30 °C setpoint adjustment and power-relay control.',
-        de: 'Zweipunkt-Temperaturregelung mit 0,5 °C Hysterese: analoge Temperaturerfassung, Sollwertbereich 15–30 °C und Steuerung eines Leistungsrelais.'
+        en: 'On/off thermal control with 0.5 °C hysteresis: analog temperature reading, 15–30 °C setpoint adjustment and power-relay control.'
       },
       validation: {
         fr: 'Vérification des seuils de commutation, de l’hystérésis et du comportement du relais.',
-        en: 'Verification of switching thresholds, hysteresis behaviour and relay operation.',
-        de: 'Prüfung der Schaltschwellen, der Hysterese und des Relaisverhaltens.'
+        en: 'Verification of switching thresholds, hysteresis behaviour and relay operation.'
       },
       code: `if (temperature < setpoint - hysteresis) {
   digitalWrite(RELAY_PIN, HIGH);
@@ -929,21 +840,15 @@ lcd.print(humidity);`
     },
     'A08': {
       ref: 'PR-08',
-      title: { fr: 'Minuterie & interface utilisateur', en: 'Timer & User Interface', de: 'Timer & Benutzerschnittstelle' },
-      hardware: {
-        fr: 'Arduino Uno, encodeur rotatif, LCD 16 × 2, bouton, buzzer.',
-        en: 'Arduino Uno, rotary encoder, 16 × 2 LCD, button, buzzer.',
-        de: 'Arduino Uno, Drehencoder, 16 × 2 LCD, Taster, Summer.'
-      },
+      title: { fr: 'Minuterie & interface utilisateur', en: 'Timer & User Interface' },
+      hardware: { fr: 'Arduino Uno, encodeur rotatif, LCD 16 × 2, bouton, buzzer.', en: 'Arduino Uno, rotary encoder, 16 × 2 LCD, button, buzzer.' },
       desc: {
         fr: 'Conception d’une interface utilisateur embarquée : réglage par encodeur rotatif, mise à jour de l’affichage chaque seconde et alarme sonore en fin de cycle.',
-        en: 'Design of an embedded user interface: rotary-encoder setting, one-second display refresh and audible end-of-cycle alarm.',
-        de: 'Entwicklung einer Embedded-Benutzeroberfläche: Einstellung per Drehencoder, sekündliche Display-Aktualisierung und akustischer Endalarm.'
+        en: 'Design of an embedded user interface: rotary-encoder setting, one-second display refresh and audible end-of-cycle alarm.'
       },
       validation: {
         fr: 'Vérification du décompte temporel, de la mise à jour de l’interface et du déclenchement de l’alarme.',
-        en: 'Verification of countdown timing, interface refresh and alarm triggering.',
-        de: 'Prüfung des Countdowns, der Aktualisierung der Oberfläche und der Alarmauslösung.'
+        en: 'Verification of countdown timing, interface refresh and alarm triggering.'
       },
       code: `if (millis() - previousMillis >= 1000) {
   previousMillis = millis();
@@ -956,21 +861,15 @@ lcd.print(humidity);`
     },
     'A09': {
       ref: 'PR-09',
-      title: { fr: 'Robot suiveur de ligne', en: 'Line-Following Robot', de: 'Linienfolger-Roboter' },
-      hardware: {
-        fr: 'Châssis 2 roues, Arduino Uno, driver L298N, capteurs infrarouges TCRT5000.',
-        en: '2WD chassis, Arduino Uno, L298N driver, TCRT5000 infrared sensors.',
-        de: '2WD-Chassis, Arduino Uno, L298N-Treiber, TCRT5000-Infrarotsensoren.'
-      },
+      title: { fr: 'Robot suiveur de ligne', en: 'Line-Following Robot' },
+      hardware: { fr: 'Châssis 2 roues, Arduino Uno, driver L298N, capteurs infrarouges TCRT5000.', en: '2WD chassis, Arduino Uno, L298N driver, TCRT5000 infrared sensors.' },
       desc: {
         fr: 'Commande différentielle d’un robot mobile à partir de capteurs de réflexion infrarouge, avec correction de trajectoire par PWM et rapports cycliques compris entre 40 % et 80 %.',
-        en: 'Differential control of a mobile robot using infrared reflectance sensors, PWM-based trajectory correction and duty cycles between 40% and 80%.',
-        de: 'Differenzielle Steuerung eines mobilen Roboters mit Infrarot-Reflexionssensoren, PWM-Korrektur und Tastverhältnissen zwischen 40 % und 80 %.'
+        en: 'Differential control of a mobile robot using infrared reflectance sensors, PWM-based trajectory correction and duty cycles between 40% and 80%.'
       },
       validation: {
         fr: 'Validation fonctionnelle du comportement de navigation : détection de ligne, décision directionnelle et commande des moteurs.',
-        en: 'Functional validation of navigation behaviour: line detection, directional decision-making and motor control.',
-        de: 'Funktionale Validierung des Fahrverhaltens: Linienerkennung, Richtungsentscheidung und Motorsteuerung.'
+        en: 'Functional validation of navigation behaviour: line detection, directional decision-making and motor control.'
       },
       code: `if (left == HIGH && right == HIGH) {
   setSpeed(150, 150);
@@ -984,21 +883,15 @@ lcd.print(humidity);`
     },
     'A10': {
       ref: 'PR-10',
-      title: { fr: 'Robot éviteur d’obstacles', en: 'Obstacle-Avoiding Robot', de: 'Hindernisvermeidender Roboter' },
-      hardware: {
-        fr: 'Châssis robotique, Arduino Uno, HC-SR04, servomoteur SG90, driver L298N.',
-        en: 'Robot chassis, Arduino Uno, HC-SR04, SG90 servo, L298N driver.',
-        de: 'Roboter-Chassis, Arduino Uno, HC-SR04, SG90-Servo, L298N-Treiber.'
-      },
+      title: { fr: 'Robot éviteur d’obstacles', en: 'Obstacle-Avoiding Robot' },
+      hardware: { fr: 'Châssis robotique, Arduino Uno, HC-SR04, servomoteur SG90, driver L298N.', en: 'Robot chassis, Arduino Uno, HC-SR04, SG90 servo, L298N driver.' },
       desc: {
         fr: 'Système embarqué de navigation réactive : mesure de distance par ultrasons, détection d’obstacle sous 20 cm, période de mesure de 100 ms et commande autonome des moteurs.',
-        en: 'Reactive embedded navigation system: ultrasonic distance measurement, obstacle detection below 20 cm, 100 ms measurement period and autonomous motor control.',
-        de: 'Reaktives Embedded-Navigationssystem: Ultraschall-Abstandsmessung, Hinderniserkennung unter 20 cm, 100-ms-Messperiode und autonome Motorsteuerung.'
+        en: 'Reactive embedded navigation system: ultrasonic distance measurement, obstacle detection below 20 cm, 100 ms measurement period and autonomous motor control.'
       },
       validation: {
         fr: 'Validation du comportement réactif : mesure de distance, seuil de détection, arrêt et manoeuvre d’évitement.',
-        en: 'Validation of reactive behaviour: distance measurement, detection threshold, stopping and avoidance manoeuvre.',
-        de: 'Validierung des reaktiven Verhaltens: Abstandsmessung, Erkennungsschwelle, Stopp und Ausweichmanöver.'
+        en: 'Validation of reactive behaviour: distance measurement, detection threshold, stopping and avoidance manoeuvre.'
       },
       code: `long distance = getDistance();
 
@@ -1010,21 +903,15 @@ if (distance < 20 && distance > 0) {
     },
     'A11': {
       ref: 'PR-11',
-      title: { fr: 'Commande sans fil par Bluetooth', en: 'Wireless Bluetooth Control', de: 'Drahtlose Bluetooth-Steuerung' },
-      hardware: {
-        fr: 'Châssis robotique, Arduino Uno, module HC-05/HC-06, driver moteur L293D/L298N.',
-        en: 'Robot chassis, Arduino Uno, HC-05/HC-06 module, L293D/L298N motor driver.',
-        de: 'Roboter-Chassis, Arduino Uno, HC-05/HC-06-Modul, L293D/L298N-Motortreiber.'
-      },
+      title: { fr: 'Commande sans fil par Bluetooth', en: 'Wireless Bluetooth Control' },
+      hardware: { fr: 'Châssis robotique, Arduino Uno, module HC-05/HC-06, driver moteur L293D/L298N.', en: 'Robot chassis, Arduino Uno, HC-05/HC-06 module, L293D/L298N motor driver.' },
       desc: {
         fr: 'Communication série sans fil à 9600 bauds et interprétation de commandes caractères pour le pilotage à distance d’un véhicule mobile.',
-        en: '9600-baud wireless serial communication and character-command interpretation for remote control of a mobile vehicle.',
-        de: 'Drahtlose serielle Kommunikation mit 9600 Baud und Interpretation von Zeichenbefehlen zur Fernsteuerung eines mobilen Fahrzeugs.'
+        en: '9600-baud wireless serial communication and character-command interpretation for remote control of a mobile vehicle.'
       },
       validation: {
         fr: 'Validation de la réception des commandes, de l’interprétation des trames et de la réponse des actionneurs.',
-        en: 'Validation of command reception, frame interpretation and actuator response.',
-        de: 'Validierung des Befehlsempfangs, der Frame-Interpretation und der Aktorantwort.'
+        en: 'Validation of command reception, frame interpretation and actuator response.'
       },
       code: `if (BTSerial.available()) {
   char command = BTSerial.read();
@@ -1038,21 +925,15 @@ if (distance < 20 && distance > 0) {
     },
     'L01': {
       ref: 'EMB-01',
-      title: { fr: 'GPIO & séquencement matériel', en: 'GPIO & Hardware Sequencing', de: 'GPIO & Hardware-Sequenzierung' },
-      hardware: {
-        fr: 'STM32L152, 8 LEDs, résistances de limitation, sonde de programmation.',
-        en: 'STM32L152, 8 LEDs, current-limiting resistors, programming probe.',
-        de: 'STM32L152, 8 LEDs, Vorwiderstände, Programmieradapter.'
-      },
+      title: { fr: 'GPIO & séquencement matériel', en: 'GPIO & Hardware Sequencing' },
+      hardware: { fr: 'STM32L152, 8 LEDs, résistances de limitation, sonde de programmation.', en: 'STM32L152, 8 LEDs, current-limiting resistors, programming probe.' },
       desc: {
         fr: 'Configuration bas niveau des GPIO via les registres MODER, OTYPER et PUPDR. Séquencement de 8 sorties par décalage logique avec une cadence de 100 à 500 ms.',
-        en: 'Low-level GPIO configuration using MODER, OTYPER and PUPDR registers. Eight-output sequencing through bitwise shifting at a 100–500 ms rate.',
-        de: 'Low-Level-GPIO-Konfiguration über MODER, OTYPER und PUPDR. Sequenzsteuerung von 8 Ausgängen durch Bitverschiebung mit 100–500 ms Takt.'
+        en: 'Low-level GPIO configuration using MODER, OTYPER and PUPDR registers. Eight-output sequencing through bitwise shifting at a 100–500 ms rate.'
       },
       validation: {
         fr: 'Vérification de la configuration des broches, de l’ordre de commutation et de la cadence du séquenceur.',
-        en: 'Verification of pin configuration, switching order and sequencer timing.',
-        de: 'Prüfung der Pin-Konfiguration, der Schaltreihenfolge und des Sequenzer-Takts.'
+        en: 'Verification of pin configuration, switching order and sequencer timing.'
       },
       code: `RCC->AHBENR |= RCC_AHBENR_GPIOBEN;
 GPIOB->MODER |= 0x5555;
@@ -1066,21 +947,15 @@ while (1) {
     },
     'L02': {
       ref: 'EMB-02',
-      title: { fr: 'Interruptions externes', en: 'External Interrupts', de: 'Externe Interrupts' },
-      hardware: {
-        fr: 'STM32L152, bouton utilisateur, LED, ligne EXTI.',
-        en: 'STM32L152, user button, LED, EXTI line.',
-        de: 'STM32L152, Benutzer-Taster, LED, EXTI-Leitung.'
-      },
+      title: { fr: 'Interruptions externes', en: 'External Interrupts' },
+      hardware: { fr: 'STM32L152, bouton utilisateur, LED, ligne EXTI.', en: 'STM32L152, user button, LED, EXTI line.' },
       desc: {
         fr: 'Configuration d’une interruption externe non bloquante : routage SYSCFG, masques NVIC, détection de front et routine d’interruption avec anti-rebond logiciel de 20 à 50 ms.',
-        en: 'Configuration of a non-blocking external interrupt: SYSCFG routing, NVIC masks, edge detection and interrupt service routine with 20–50 ms software debounce.',
-        de: 'Konfiguration eines nicht blockierenden externen Interrupts: SYSCFG-Routing, NVIC-Masken, Flankenerkennung und ISR mit 20–50 ms Software-Entprellung.'
+        en: 'Configuration of a non-blocking external interrupt: SYSCFG routing, NVIC masks, edge detection and interrupt service routine with 20–50 ms software debounce.'
       },
       validation: {
         fr: 'Vérification du déclenchement de l’interruption, de l’acquittement du flag et de la stabilité de la lecture.',
-        en: 'Verification of interrupt triggering, flag clearing and input-reading stability.',
-        de: 'Prüfung der Interruptauslösung, des Flag-Quittierens und der Eingangsstabilität.'
+        en: 'Verification of interrupt triggering, flag clearing and input-reading stability.'
       },
       code: `void EXTI15_10_IRQHandler(void) {
   if (EXTI->PR & EXTI_PR_PR13) {
@@ -1091,21 +966,15 @@ while (1) {
     },
     'L03': {
       ref: 'EMB-03',
-      title: { fr: 'Timers & base de temps', en: 'Timers & Timebase', de: 'Timer & Zeitbasis' },
-      hardware: {
-        fr: 'STM32L152, TIM2, NVIC, registres PSC et ARR.',
-        en: 'STM32L152, TIM2, NVIC, PSC and ARR registers.',
-        de: 'STM32L152, TIM2, NVIC, PSC- und ARR-Register.'
-      },
+      title: { fr: 'Timers & base de temps', en: 'Timers & Timebase' },
+      hardware: { fr: 'STM32L152, TIM2, NVIC, registres PSC et ARR.', en: 'STM32L152, TIM2, NVIC, PSC and ARR registers.' },
       desc: {
         fr: 'Génération d’une base de temps matérielle de 1 Hz à partir d’un timer STM32, avec prédiviseur et registre d’autorechargement, indépendante des boucles d’attente logicielles.',
-        en: 'Generation of a 1 Hz hardware-timer timebase using an STM32 timer, prescaler and auto-reload register, independent of software delay loops.',
-        de: 'Erzeugung einer 1-Hz-Hardware-Timer-Zeitbasis mit STM32-Timer, Prescaler und Auto-Reload-Register, unabhängig von Software-Warteschleifen.'
+        en: 'Generation of a 1 Hz hardware-timer timebase using an STM32 timer, prescaler and auto-reload register, independent of software delay loops.'
       },
       validation: {
         fr: 'Vérification de la période générée, du déclenchement de l’interruption de débordement et de l’indépendance vis-à-vis du CPU.',
-        en: 'Verification of generated period, update-interrupt triggering and independence from CPU loops.',
-        de: 'Prüfung der erzeugten Periode, des Update-Interrupts und der Unabhängigkeit von CPU-Schleifen.'
+        en: 'Verification of generated period, update-interrupt triggering and independence from CPU loops.'
       },
       code: `TIM2->PSC = 16000 - 1;
 TIM2->ARR = 1000 - 1;
@@ -1115,21 +984,15 @@ TIM2->CR1 |= TIM_CR1_CEN;`
     },
     'L04': {
       ref: 'EMB-04',
-      title: { fr: 'Génération PWM', en: 'PWM Generation', de: 'PWM-Erzeugung' },
-      hardware: {
-        fr: 'STM32L152, TIM3, sortie PA6, oscilloscope.',
-        en: 'STM32L152, TIM3, PA6 output, oscilloscope.',
-        de: 'STM32L152, TIM3, PA6-Ausgang, Oszilloskop.'
-      },
+      title: { fr: 'Génération PWM', en: 'PWM Generation' },
+      hardware: { fr: 'STM32L152, TIM3, sortie PA6, oscilloscope.', en: 'STM32L152, TIM3, PA6 output, oscilloscope.' },
       desc: {
         fr: 'Configuration du mode PWM sur TIM3 et contrôle dynamique du rapport cyclique de 0 à 100 % via le registre de comparaison CCR1.',
-        en: 'PWM mode configuration on TIM3 and dynamic duty-cycle control from 0% to 100% through the CCR1 compare register.',
-        de: 'PWM-Modus-Konfiguration auf TIM3 und dynamische Steuerung des Tastverhältnisses von 0 % bis 100 % über das Vergleichsregister CCR1.'
+        en: 'PWM mode configuration on TIM3 and dynamic duty-cycle control from 0% to 100% through the CCR1 compare register.'
       },
       validation: {
         fr: 'Vérification de la fréquence PWM, du rapport cyclique et de la cohérence entre CCR1 et la sortie mesurée.',
-        en: 'Verification of PWM frequency, duty cycle and consistency between CCR1 and the measured output.',
-        de: 'Prüfung der PWM-Frequenz, des Tastverhältnisses und der Konsistenz zwischen CCR1 und Ausgangssignal.'
+        en: 'Verification of PWM frequency, duty cycle and consistency between CCR1 and the measured output.'
       },
       code: `TIM3->CCMR1 |= (0x6 << TIM_CCMR1_OC1M_Pos);
 TIM3->CCMR1 |= TIM_CCMR1_OC1PE;
@@ -1138,21 +1001,15 @@ TIM3->CCR1 = 500;`
     },
     'L05': {
       ref: 'EMB-05',
-      title: { fr: 'Acquisition analogique & capteurs', en: 'Analog Acquisition & Sensors', de: 'Analoge Erfassung & Sensoren' },
-      hardware: {
-        fr: 'STM32L152, ADC 12 bits, capteur analogique, référence de tension 3,3 V.',
-        en: 'STM32L152, 12-bit ADC, analog sensor, 3.3 V voltage reference.',
-        de: 'STM32L152, 12-Bit-ADC, analoger Sensor, 3,3-V-Referenzspannung.'
-      },
+      title: { fr: 'Acquisition analogique & capteurs', en: 'Analog Acquisition & Sensors' },
+      hardware: { fr: 'STM32L152, ADC 12 bits, capteur analogique, référence de tension 3,3 V.', en: 'STM32L152, 12-bit ADC, analog sensor, 3.3 V voltage reference.' },
       desc: {
         fr: 'Acquisition analogique 12 bits sur une plage de 0 à 3,3 V, configuration du temps d’échantillonnage, calibration du convertisseur et filtrage logiciel par moyennage.',
-        en: '12-bit analog acquisition over a 0–3.3 V range, sampling-time configuration, converter calibration and software averaging filter.',
-        de: '12-Bit-Analogerfassung im Bereich 0–3,3 V, Konfiguration der Abtastzeit, ADC-Kalibrierung und softwarebasierte Mittelwertfilterung.'
+        en: '12-bit analog acquisition over a 0–3.3 V range, sampling-time configuration, converter calibration and software averaging filter.'
       },
       validation: {
         fr: 'Vérification de la fin de conversion, de la linéarité de lecture et de la réduction du bruit par filtrage.',
-        en: 'Verification of conversion completion, reading linearity and noise reduction through filtering.',
-        de: 'Prüfung des Wandlungsabschlusses, der Linearität und der Rauschreduktion durch Filterung.'
+        en: 'Verification of conversion completion, reading linearity and noise reduction through filtering.'
       },
       code: `ADC1->CR2 |= ADC_CR2_SWSTART;
 while (!(ADC1->SR & ADC_SR_EOC));
@@ -1161,21 +1018,15 @@ uint16_t raw_value = ADC1->DR;`
     },
     'L06': {
       ref: 'EMB-06',
-      title: { fr: 'Bus I2C & capteurs numériques', en: 'I2C Bus & Digital Sensors', de: 'I2C-Bus & digitale Sensoren' },
-      hardware: {
-        fr: 'STM32L152, lignes SDA/SCL, capteur AD7991-0, résistances pull-up.',
-        en: 'STM32L152, SDA/SCL lines, AD7991-0 sensor, pull-up resistors.',
-        de: 'STM32L152, SDA/SCL-Leitungen, AD7991-0-Sensor, Pull-up-Widerstände.'
-      },
+      title: { fr: 'Bus I2C & capteurs numériques', en: 'I2C Bus & Digital Sensors' },
+      hardware: { fr: 'STM32L152, lignes SDA/SCL, capteur AD7991-0, résistances pull-up.', en: 'STM32L152, SDA/SCL lines, AD7991-0 sensor, pull-up resistors.' },
       desc: {
         fr: 'Mise en œuvre du protocole I2C en mode standard à 100 kHz : conditions START/STOP, adressage esclave, échange de registres et lecture de données capteur.',
-        en: 'Implementation of the I2C protocol in 100 kHz standard mode: START/STOP conditions, slave addressing, register exchange and sensor-data reading.',
-        de: 'Implementierung des I2C-Protokolls im 100-kHz-Standardmodus: START/STOP-Bedingungen, Slave-Adressierung, Registeraustausch und Sensor-Datenlesen.'
+        en: 'Implementation of the I2C protocol in 100 kHz standard mode: START/STOP conditions, slave addressing, register exchange and sensor-data reading.'
       },
       validation: {
         fr: 'Vérification des conditions de bus, de l’acquittement d’adresse, de la lecture des registres et de la cohérence des données.',
-        en: 'Verification of bus conditions, address acknowledgement, register reading and data consistency.',
-        de: 'Prüfung der Busbedingungen, der Adressquittierung, des Registerlesens und der Datenkonsistenz.'
+        en: 'Verification of bus conditions, address acknowledgement, register reading and data consistency.'
       },
       code: `I2C1->CR1 |= I2C_CR1_START;
 while (!(I2C1->SR1 & I2C_SR1_SB));
@@ -1199,7 +1050,6 @@ while (!(I2C1->SR1 & I2C_SR1_ADDR));
       <h4>
         <span class="lang-fr">${d.title.fr}</span>
         <span class="lang-en">${d.title.en}</span>
-        <span class="lang-de">${d.title.de}</span>
       </h4>
       <span class="mcu">// STM32L152 · register-level embedded engineering</span>
     `;
@@ -1219,7 +1069,6 @@ while (!(I2C1->SR1 & I2C_SR1_ADDR));
       <h4>
         <span class="lang-fr">${d.title.fr}</span>
         <span class="lang-en">${d.title.en}</span>
-        <span class="lang-de">${d.title.de}</span>
       </h4>
       <span class="mcu">// Technical demonstrator · Arduino C++</span>
     `;
